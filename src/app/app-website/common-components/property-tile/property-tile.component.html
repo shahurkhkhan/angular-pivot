@@ -1,0 +1,79 @@
+
+<div class="card p-1 border-0 shadow property-tile tile-grid" *ngIf="type === 'grid'">
+  <div class="property-image rounded-top w-100 m-auto bg-primary">
+    <ng-container *ngIf="'factory'">
+      <img [src]="'factory.jpg' | assetsimage" [attr.alt]="'factory'" class="img-fluid bg-image">
+    </ng-container>
+    <!-- Absolute -->
+    <span class="d-inline-block sell-label px-2 py-1 rounded bg-secondary text-secondary-contrast position-absolute">For Lease</span>
+    <div class="like-button-wraper">
+      <a href="javascript:;" class="like-button rounded-circle border border-secondary d-flex align-items-center bg-white justify-content-center">
+        <i class="fa fa-heart-o fs-5 mt-1 text-secondary" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+  <div class="property-content p-3">
+    <div class="property-detail">
+      <a class="text-black text-left d-block text-primary-hover fs-5 mb-1 font-primary-bold" routerLink="/properties/123">
+        Property Name Goes Here
+      </a>
+      <h3 class="text-secondary text-left fs-4 font-primary-bold">
+        50,000 Sq. Ft.
+      </h3>
+      <address class="font-primary-regular d-flex align-items-center mb-2">
+        <img [src]="'icn_map_pin_b.png' | assetsimage" class="me-2"> VH6W+47X, Bareja, Gujarat 382425
+      </address>
+      <h2 class="text-primary fs-4">₹ 15,000  <span class="text-black fs-5">/ month</span></h2>
+      <div class="d-flex align-items-center">
+        <p class="m-0 d-flex align-items-center"> <img [src]="'icn_views_b.png' | assetsimage" class="me-2"> 120 </p>
+        <p class="m-0 d-flex align-items-center ms-4"> <img [src]="'icn_likes_b.png' | assetsimage" class="me-2"> 264 </p>
+      </div>
+    </div>
+    <!-- <div class="action-wraper d-flex justify-content-between border-top pt-3 mt-3">
+      <a href="javascript:;">
+        <img [src]="'icn_favoriite_b.png' |assetsimage" alt="icn_favoriite_b" class="img-fluid">
+      </a>
+      <a href="javascript:;">
+        <img [src]="'icn_like_b.png' |assetsimage" alt="icn_like_b" class="img-fluid">
+      </a>
+      <a href="javascript:;">
+        <img [src]="'icn_share_b.png' |assetsimage" alt="icn_share_b" class="img-fluid">
+      </a>
+    </div> -->
+  </div>
+</div>
+<div class="card border-0 d-flex flex-row shadow property-tile tile-list" *ngIf="type === 'list'">
+  <div class="property-image col-md-4 bg-primary">
+    <ng-container *ngIf="'factory'">
+      <img [src]="'factory.jpg' | assetsimage" [attr.alt]="'factory'" class="img-fluid bg-image">
+    </ng-container>
+    <span class="d-inline-block sell-label px-1 rounded bg-secondary text-secondary-contrast position-absolute fs-7">For Lease</span>
+    <div class="like-button-wraper">
+      <a href="javascript:;" class="like-button rounded-circle border border-secondary d-flex align-items-center bg-white justify-content-center">
+        <i class="fa fa-heart-o fs-6 mt-1 text-secondary" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+  <div class="property-content p-2 col-md-8">
+    <div class="property-detail">
+      <a class="text-A700 d-block mb-1 text-primary-hover fs-6 text-ellipsis--1 font-primary-bold m-0" [routerLink]="['/properties/123']">
+        Property Name Goes Here
+      </a>
+      <p class="font-primary-regular mb-1 fs-7 m-0 text-ellipsis--1">
+        VH6W+47X, Bareja, Gujarat 382425
+      </p>
+      <h2 class="text-A700 fs-5 mb-0 mt-1 ">₹ 15,000  <span class="text-black fs-5">/ month</span></h2>
+    </div>
+    <!-- <div class="action-wraper d-flex mt-2">
+      <a href="javascript:;" class="me-2">
+        <img [src]="'icn_favoriite_b.png' |assetsimage" width="20" alt="icn_favoriite_b" class="img-fluid">
+      </a>
+      <a href="javascript:;"  class="me-2">
+        <img [src]="'icn_like_b.png' |assetsimage" width="20" alt="icn_like_b" class="img-fluid">
+      </a>
+      <a href="javascript:;">
+        <img [src]="'icn_share_b.png' |assetsimage" width="20" alt="icn_share_b" class="img-fluid">
+      </a>
+    </div> -->
+  </div>
+</div>

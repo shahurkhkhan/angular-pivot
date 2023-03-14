@@ -1,0 +1,56 @@
+:host {
+  .card {
+    overflow: hidden;
+  }
+  // GRID
+  .tile-grid {
+    .property-image {
+      height: 180px;
+    }
+    .like-button-wraper {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      .like-button {
+        width: 30px;
+        height: 30px;
+      }
+    }
+  }
+  // LIST
+  .tile-list {
+    .property-image {
+      min-height: 70px;
+    }
+    .property-image {
+      .sell-label {
+        top: 6px;
+        left: 6px;
+      }
+    }
+    .like-button-wraper {
+      position: absolute;
+      bottom: 6px;
+      left: 6px;
+      .like-button {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+
+  // Common
+  .property-image {
+    background-color: #ddd;
+    overflow: hidden;
+    .bg-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .sell-label {
+      top: 15px;
+      left: 15px;
+    }
+  }
+}

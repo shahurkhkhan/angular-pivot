@@ -1,0 +1,21 @@
+<div class="location-form rounded d-flex align-items-center" [formGroup]="formGroup">
+  <mat-form-field appearance="fill" class="dropdown-wraper col-md-4 p-0">
+    <mat-select formControlName="location">
+      <mat-select-trigger>
+        <div class="d-flex align-items-center">
+          <img [src]="'icn_map_pin_c.png' | assetsimage" alt="" srcset="">
+          <span class="ms-3 location-value">{{formGroup.get('location')?.value || ''}}</span>
+        </div>
+      </mat-select-trigger>
+      <mat-option
+        *ngFor="let location of locations"
+        [value]="location"
+      >
+        {{location}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="search-wraper col-md-8 p-0">
+    <input matInput placeholder="Search for location" formControlName="search">
+  </mat-form-field>
+</div>

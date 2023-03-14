@@ -1,0 +1,35 @@
+<form action="">
+  <div class="form-row row">
+    <div class="form-group col-md-6 mb-3">
+      <label class="text-primary-contrast mb-1 p-0">Name</label>
+      <input type="text" matInput  placeholder="Enter name here" class="form-control">
+    </div>
+    <div class="form-group col-md-6 mb-3">
+      <label class="text-primary-contrast mb-1  p-0">Company Name</label>
+      <input type="text" matInput  placeholder="Enter name here" class="form-control">
+    </div>
+    <div class="form-group col-md-6 mb-3">
+      <label class="text-primary-contrast mb-1  p-0">E-mail</label>
+      <input type="email" matInput  placeholder="Enter e-mail here" class="form-control">
+    </div>
+    <div class="form-group col-md-6 mb-3">
+      <label class="text-primary-contrast mb-1  p-0">Phone Number</label>
+      <input type="text" matInput  placeholder="Enter Phone Number here" class="form-control">
+    </div>
+    <div class="form-group col-md-12">
+      <div class="uploader bg-400 py-3 px-5 rounded">
+        <h6 class="text-center text-400-contrast fs-5 mb-0 ">Upload RFP Document</h6>
+        <p class="text-center text-400-contrast">word or PDF files are allowed</p>
+        <ngx-dropzone>
+          <ngx-dropzone-label class="text-center">
+            <img [src]="'icn_upload_o.png' | assetsimage">
+            <h5>Drag and Drop your file here OR <span class="text-secondary fw-bold p-0">Browse</span> to upload</h5>
+          </ngx-dropzone-label>
+        </ngx-dropzone>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 mt-3">
+    <button class="btn btn-lg btn-secondary w-100 d-block text-secondary-contrast">Submit</button>
+  </div>
+</form>

@@ -1,0 +1,32 @@
+.form-control:not(textarea) {
+  height: 42px;
+}
+input.form-control,
+textarea.form-control {
+  font-weight: 700;
+  color: #000;
+  &::-webkit-input-placeholder {
+    font-weight: 700;
+    color: #000;
+  }
+  &:-ms-input-placeholder {
+    font-weight: 700;
+    color: #000;
+  }
+  &::placeholder {
+    font-weight: 700;
+    color: #000;
+  }
+}
+.app-dropdown {
+  height: 42px;
+  background: #fff;
+
+  .mat-mdc-select-trigger {
+    padding: 0px 10px;
+    height: 100%;
+    font-weight: 700;
+    color: #000;
+  }
+
+}

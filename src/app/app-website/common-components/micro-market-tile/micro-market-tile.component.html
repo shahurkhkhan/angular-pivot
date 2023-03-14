@@ -1,0 +1,31 @@
+
+<div class="card p-1 shadow m-1 micro-service-tile tile-{{type}}" *ngIf="type === 'grid'">
+  <div class="micro-header">
+    <div class="market-image rounded-top w-100 m-auto bg-primary">
+      <ng-container *ngIf="image">
+        <img [src]="image" [attr.alt]="image" class="img-fluid">
+      </ng-container>
+    </div>
+  </div>
+  <div class="client-testimonial-content p-3">
+    <h4 class="text-secondary text-center fs-2">
+      <a routerLink="/market-overview/123" class="text-secondary font-primary-bold text-primary-hover" href="javascript:;">{{title}}</a>
+    </h4>
+    <p class="p-0 fs-5 text-center font-primary-regular">{{contnet}}</p>
+  </div>
+</div>
+<div class="card shadow-sm micro-service-tile tile-{{type}} d-flex flex-row" *ngIf="type === 'list'">
+  <div class="micro-header col-md-4">
+    <div class="market-image w-100 h-100 m-auto bg-primary">
+      <ng-container *ngIf="image">
+        <img [src]="image" [attr.alt]="image" class="img-fluid">
+      </ng-container>
+    </div>
+  </div>
+  <div class="client-testimonial-content p-3 col-md-8">
+    <h4 class="text-A700 fs-5 m-0 mb-1">
+      <a routerLink="/market-overview/123" class="text-secondary font-primary-bold text-primary-hover "  href="javascript:;">{{title}}</a>
+    </h4>
+    <p class="p-0 fs-6 font-primary-regular lh-1 m-0 text-ellipsis--3">{{contnet}}</p>
+  </div>
+</div>

@@ -1,0 +1,284 @@
+<div class="market-overview-page">
+  <div class="market-overview-page-wraper d-flex">
+    <div class="col-md-3 market-search-wraper bg-primary p-4 d-flex justify-content-end">
+      <app-micro-market-filter-form></app-micro-market-filter-form>
+    </div>
+    <div class="col-md-9 market-detail p-4">
+      <div
+        class="overview-header border-bottom border-2 d-flex justify-content-between mb-3 align-items-center"
+      >
+        <h2 class="fs-4">Aslali - Bareja - Kheda</h2>
+        <div class="view-types d-flex align-items-end">
+          <button class="btn bg-A100 text-A100-contrast py-2 px-4">
+            INDUSTRIAL
+          </button>
+          <button class="btn bg-A700 text-A700-contrast py-3 px-4 active">
+            LOGISTICS
+          </button>
+        </div>
+      </div>
+
+      <div class="overview-images-wraper">
+        <div class="all-images-wraper">
+          <owl-carousel-o [options]="sliderConfigration">
+            <ng-template
+              carouselSlide
+              *ngFor="let album of albums; let i = index"
+            >
+              <div class="image-column px-1">
+                <img
+                  [src]="'factory.jpg' | assetsimage"
+                  class="image-cover"
+                  (click)="open(i)"
+                />
+              </div>
+            </ng-template>
+          </owl-carousel-o>
+        </div>
+      </div>
+      <div
+        class="overview-type mb-3 border-bottom border-2 d-flex p-4 px-0 justify-content-between"
+      >
+        <div class="col-auto p-3">
+          <h4 class="text-A700 fs-4 font-primary-regular mb-0">Excellent</h4>
+          <p class="fs-6 m-0">Accessibility</p>
+        </div>
+        <div class="col-auto p-3">
+          <h4 class="text-A700 fs-4 font-primary-regular mb-0">Good</h4>
+          <p class="fs-6 m-0">Infrastructure - current</p>
+        </div>
+        <div class="col-auto p-3">
+          <h4 class="text-A700 fs-4 font-primary-regular mb-0">Average</h4>
+          <p class="fs-6 m-0">Infrastructure - upcoming</p>
+        </div>
+        <div class="col-auto p-3">
+          <h4 class="text-A700 fs-4 font-primary-regular mb-0">Good</h4>
+          <p class="fs-6 m-0">Ease of doing business</p>
+        </div>
+        <div class="col-auto p-3">
+          <h4 class="text-A700 fs-4 font-primary-regular mb-0">Good</h4>
+          <p class="fs-6 m-0">Social infrastructure</p>
+        </div>
+      </div>
+      <div
+        class="overview-locations mb-3 border-bottom border-2 d-flex p-4 px-0 justify-content-between"
+      >
+        <div class="location-column p-3">
+          <div class="airport-icon text-center mb-3">
+            <img [src]="'icn_airport.png' | assetsimage" alt="" height="50" />
+          </div>
+          <h4 class="text-A700 fs-3 text-center font-primary-semibold mb-0">
+            Airport Proximity
+          </h4>
+          <p class="fs-5 m-0 text-center mt-2">
+            25 kms from Ahmedabad international airport
+          </p>
+        </div>
+        <div class="location-column p-3">
+          <div class="ailway-icon text-center mb-3">
+            <img [src]="'icn_railway.png' | assetsimage" alt="" height="50" />
+          </div>
+          <h4 class="text-A700 fs-3 text-center font-primary-semibold mb-0">
+            Railway Station
+          </h4>
+          <p class="fs-5 m-0 text-center mt-2">
+            15 km from Ahmedabad railway station
+          </p>
+        </div>
+        <div class="location-column p-3">
+          <div class="bus-icon text-center mb-3">
+            <img
+              [src]="'icn_public_transport.png' | assetsimage"
+              alt=""
+              height="50"
+            />
+          </div>
+          <h4 class="text-A700 fs-3 text-center font-primary-semibold mb-0">
+            Public Transport
+          </h4>
+          <p class="fs-5 m-0 text-center mt-2">
+            Well connected through public transport as most of the area is
+            surrounded by national & state highway’s
+          </p>
+        </div>
+        <div class="location-column p-3">
+          <div class="port-icon text-center mb-3">
+            <img [src]="'icn_port.png' | assetsimage" alt="" height="50" />
+          </div>
+          <h4 class="text-A700 fs-3 text-center font-primary-semibold mb-0">
+            Port
+          </h4>
+          <p class="fs-5 m-0 text-center mt-2">
+            Kandla port: 309 kms Mundra port: 363 kms
+          </p>
+        </div>
+        <div class="location-column p-3">
+          <div class="port-icon text-center mb-3">
+            <img [src]="'icn_socio.png' | assetsimage" alt="" height="50" />
+          </div>
+          <h4 class="text-A700 fs-3 text-center font-primary-semibold mb-0">
+            Socio Economic
+          </h4>
+          <p class="fs-5 m-0 text-center mt-2">
+            Easily accessible to various residential suburbs providing quality
+            housing
+          </p>
+        </div>
+      </div>
+      <div
+        class="location-and-dynamics mb-3 d-flex p-4 px-0 justify-content-between"
+      >
+        <div class="location-detail col-md-6 border-end p-3">
+          <h3 class="fs-4 mb-3">Location Details</h3>
+          <div class="detail-wraper">
+            <div class="location-detail-row mb-3">
+              <p class="fs-5 mb-0">Governing Body</p>
+              <p class="fs-5 font-primary-regular text-A700">
+                Ahmedabad Urban Development Authority (AUDA)
+              </p>
+            </div>
+            <div class="location-detail-row mb-3">
+              <p class="fs-5 mb-0">Highway</p>
+              <p class="fs-5 font-primary-regular text-A700">NH 64</p>
+            </div>
+            <div class="location-detail-row mb-3">
+              <p class="fs-5 mb-0">Industry Profile</p>
+              <p class="fs-5 font-primary-regular text-A700">Logistics</p>
+            </div>
+            <div class="location-detail-row mb-3">
+              <p class="fs-5 mb-0">Remarks</p>
+              <ul class="ps-3">
+                <li>
+                  <p class="fs-5 font-primary-regular text-A700">
+                    Proximity to Ahmedabad-Mumbai National Highway 64 & to
+                    Ahmedabad city is a significant driver for this market
+                  </p>
+                </li>
+
+                <li>
+                  <p class="fs-5 font-primary-regular text-A700">
+                    Easy availability of transportation & labour
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="location-detail col-md-6 p-3">
+          <h3 class="fs-4 mb-3">Micro Market Dynamics</h3>
+          <div class="detail-wraper">
+            <div class="location-detail-row mb-3">
+              <p class="fs-5 mb-0">Land Value INR/Acre</p>
+              <p class="fs-5 font-primary-regular text-A700">29 – 38 Million</p>
+            </div>
+            <div class="location-detail-row mb-3">
+              <p class="fs-5 mb-0">Rental Value INR/SF/Month</p>
+              <p class="fs-5 font-primary-regular text-A700">INR 15 - 20/-</p>
+            </div>
+            <div class="location-detail-row mb-3">
+              <p class="fs-5 mb-0">Zoning</p>
+              <p class="fs-5 font-primary-regular text-A700">AUDA/Warehousing</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="swot-wraper row">
+        <div class="col-md-3 swot-column">
+          <div class="swot-inner-column text-center h-100 px-4 pt-0 bg-A700">
+            <h2 class="d-inline-block border-bottom text-white">S</h2>
+            <div class="swot-column-detail mt-4 text-A700-contrast fs-5">
+              <p>Old and established logistics area</p>
+              <p>Good connectivity from highway and city</p>
+              <p>Lies along Delhi Mumbai industrial corridor</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 swot-column">
+          <div class="swot-inner-column text-center  h-100  px-4 pt-0 bg-A700">
+            <h2 class="d-inline-block border-bottom text-white">W</h2>
+            <div class="swot-column-detail mt-4 text-A700-contrast fs-5">
+              <p>No government allotted land,
+                only private industrial parks
+                are available</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 swot-column">
+          <div class="swot-inner-column text-center  h-100  px-4 pt-0 bg-A700">
+            <h2 class="d-inline-block border-bottom text-white">O</h2>
+            <div class="swot-column-detail mt-4 text-A700-contrast fs-5">
+              <p>Residential area in proximity</p>
+              <p>Residential area in proximity</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 swot-column">
+          <div class="swot-inner-column   h-100  text-center px-4 pt-0 bg-A700">
+            <h2 class="d-inline-block border-bottom text-white">T</h2>
+            <div class="swot-column-detail mt-4 text-A700-contrast fs-5">
+              <p>Land cost is high
+              </p>
+              <p>Rental values are also high
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="key-occupiers-wraper py-4 mt-5">
+        <h2  class="fs-4 mb-3 text-center">Key Occupier</h2>
+        <div class="all-logo-wraper row">
+          <div class="col-md-4 logo-column mb-3">
+            <div class="logo-column-inner border-bottom py-3">
+              <div class="logo-image">
+                <img [src]="'logo-1.jpg' | assetsimage" alt="" class="img-fluid">
+              </div>
+              <h6 class="text-center mt-3 fs-5">VIP Industries Limited</h6>
+            </div>
+          </div>
+          <div class="col-md-4 logo-column mb-3">
+            <div class="logo-column-inner border-bottom logo-middle-item py-3">
+              <div class="logo-image">
+                <img [src]="'logo-2.jpg' | assetsimage" alt="" class="img-fluid">
+              </div>
+              <h6 class="text-center mt-3 fs-5">Kansai Nerolac Paints Limited
+              </h6>
+            </div>
+          </div>
+          <div class="col-md-4 logo-column mb-3">
+            <div class="logo-column-inner border-bottom py-3">
+              <div class="logo-image">
+                <img [src]="'logo-3.jpg' | assetsimage" alt="" class="img-fluid">
+              </div>
+              <h6 class="text-center mt-3 fs-5">Valvoline</h6>
+            </div>
+          </div>
+          <div class="col-md-4 logo-column mb-3 ">
+            <div class="logo-column-inner border-bottom py-3">
+              <div class="logo-image">
+                <img [src]="'logo-1.jpg' | assetsimage" alt="" class="img-fluid">
+              </div>
+              <h6 class="text-center mt-3 fs-5">VIP Industries Limited</h6>
+            </div>
+          </div>
+          <div class="col-md-4 logo-column mb-3 ">
+            <div class="logo-column-inner logo-middle-item border-bottom py-3">
+              <div class="logo-image">
+                <img [src]="'logo-2.jpg' | assetsimage" alt="" class="img-fluid">
+              </div>
+              <h6 class="text-center mt-3 fs-5">Kansai Nerolac Paints Limited
+              </h6>
+            </div>
+          </div>
+          <div class="col-md-4 logo-column mb-3">
+            <div class="logo-column-inner border-bottom py-3">
+              <div class="logo-image">
+                <img [src]="'logo-3.jpg' | assetsimage" alt="" class="img-fluid">
+              </div>
+              <h6 class="text-center mt-3 fs-5">Valvoline</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

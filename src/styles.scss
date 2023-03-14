@@ -1,1 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+// Common Css
+:root {
+  --bs-body-font-family: 'Proxima Nova Rg'
+}
+html, body { height: 100%; }
+body { margin: 0;  font-family: 'Proxima Nova Rg' !important; }
+a {
+  text-decoration: none !important;
+}
+a:hover, a:focus {
+  color: white !important;
+}
+

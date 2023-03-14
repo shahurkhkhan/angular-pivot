@@ -1,0 +1,51 @@
+<form class="property-filter-try-container" [formGroup]="formGroup" (ngSubmit)="formSubmit()">
+  <!-- Property -->
+  <div class="property-toggle-tile text-center ">
+    <mat-button-toggle-group formControlName="property" class="property-toggle border-0">
+      <mat-button-toggle
+        value="industrial"
+        class="m-2 rounded text-center bg-white border border-secondary opacity-50"
+        [class.opacity-100]="formGroup.get('property')?.value === 'industrial'"
+      >
+          <img [src]="'icn_buy.png' | assetsimage">
+          <h3 class="fs-5 text-primary text-center">INDUSTRIAL</h3>
+      </mat-button-toggle>
+      <mat-button-toggle
+        value="logistics"
+        class="m-2 rounded bg-white border border-secondary opacity-50"
+        [class.opacity-100]="formGroup.get('property')?.value === 'logistics'"
+      >
+        <img [src]="'icn_lease.png' | assetsimage">
+        <h3 class="fs-5 text-primary text-center">LOGISTICS</h3>
+      </mat-button-toggle>
+  </mat-button-toggle-group>
+  </div>
+  <!-- Location -->
+  <div class="location-dropdown my-4">
+    <label class="m-0 text-primary-contrast fs-6">Location</label>
+    <mat-select formControlName="location" class="app-dropdown rounded">
+      <mat-option *ngFor="let location of ['Ahmedabad', 'Jodhpur', 'Pali Rajasthan']" [value]="location">
+        {{location}}
+      </mat-option>
+    </mat-select>
+  </div>
+  <!-- Micromarket  -->
+  <div class="location-dropdown my-4">
+    <label class="m-0 text-primary-contrast fs-6">Micromarket</label>
+    <mat-select  formControlName="micromarket" class="app-dropdown rounded">
+      <mat-option *ngFor="let location of ['Aslali - Bareja - Kheda', 'Jodhpur', 'Pali Rajasthan']" [value]="location">
+        {{location}}
+      </mat-option>
+    </mat-select>
+  </div>
+  <!-- Search -->
+  <div class="location-dropdown my-4">
+    <label class="m-0 text-primary-contrast fs-6">Search</label>
+    <input type="email" matInput  placeholder="Search" class="form-control">
+  </div>
+  <!-- Button -->
+  <div class="action-button d-flex justify-content-between mt-5">
+    <button type="reset" class="btn btn-lg btn-default d-block text-white">Reset</button>
+    <button type="submit" class="btn btn-lg btn-secondary d-block text-secondary-contrast px-3">Apply</button>
+  </div>
+</form>

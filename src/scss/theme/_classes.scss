@@ -1,0 +1,114 @@
+// Text Colors
+$contrasts: 'primary', 'secondary', 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 'A100', 'A200', 'A400', 'A700';
+$imageSize: cover, contain;
+
+
+// Text contrasts
+@each $contrast in $contrasts {
+  .text-#{$contrast}-contrast {
+    @if $contrast == 'primary' {
+      color: map-get($pivot-palette, 'contrast', 500) !important;
+    } @else if ($contrast == 'secondary') {
+      color: map-get($pivot-palette, 'contrast', 'A200') !important;
+    } @else {
+      color: map-get($pivot-palette, 'contrast', $contrast) !important;
+    }
+  }
+  .text-#{$contrast} {
+    @if $contrast == 'primary' {
+      color: map-get($pivot-palette, 500) !important;
+    } @else if ($contrast == 'secondary') {
+      color: map-get($pivot-palette, 'A200') !important;
+    } @else {
+      color: map-get($pivot-palette, $contrast) !important;
+    }
+  }
+}
+// border
+@each $contrast in $contrasts {
+  body .border-#{$contrast} {
+    @if $contrast == 'primary' {
+      border-color: map-get($pivot-palette,  500) !important;
+    } @else if ($contrast == 'secondary') {
+      border-color: map-get($pivot-palette,  'A200') !important;
+    } @else {
+      border-color: map-get($pivot-palette,  $contrast) !important;
+    }
+  }
+}
+// BG contrasts
+@each $contrast in $contrasts {
+  .bg-#{$contrast} {
+    @if $contrast == 'primary' {
+      background-color: map-get($pivot-palette, 500) !important;
+    } @else if ($contrast == 'secondary') {
+      background-color: map-get($pivot-palette, A200) !important;
+    } @else {
+      background-color: map-get($pivot-palette, $contrast) !important;
+    }
+  }
+}
+// Hover Text contrasts
+@each $contrast in $contrasts {
+  .text-#{$contrast}-hover:hover,
+  .text-#{$contrast}-hover:focus,
+  .text-#{$contrast}-hover.active {
+    @if $contrast == 'primary' {
+      color: map-get($pivot-palette, 500) !important;
+    } @else if ($contrast == 'secondary') {
+      color: map-get($pivot-palette,'A200') !important;
+    } @else {
+      color: map-get($pivot-palette, $contrast) !important;
+    }
+  }
+}
+
+@each $size in $imageSize {
+  .image-#{$size} {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: $size !important;
+  }
+}
+
+.text-ellipsis--1{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.text-ellipsis--2{
+  text-overflow:ellipsis;
+  overflow:hidden;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+}
+.text-ellipsis--3{
+  text-overflow:ellipsis;
+  overflow:hidden;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+}
+
+.hide-scrollbar {
+  &::-webkit-scrollbar {
+    width: 0rem;
+  }
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    outline: 1px solid slategrey;
+  }
+}
+
+.fs-7 {
+  font-size: 0.6rem;
+}
+.fs-8 {
+  font-size: 0.5rem;
+}

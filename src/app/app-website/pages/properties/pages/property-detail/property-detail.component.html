@@ -1,0 +1,233 @@
+<section class="hero-section position-relative">
+  <app-property-section *ngIf="searchBarState.isShow" class="mb-2 border-bottom border-2"></app-property-section>
+  <ng-container *ngTemplateOutlet="searchButton"></ng-container>
+</section>
+<section class="property-images-wraper">
+  <div class="all-images-wraper">
+    <owl-carousel-o [options]="sliderConfigration">
+      <ng-template carouselSlide *ngFor="let album of albums; let i = index;">
+        <div class="image-column px-1">
+          <img [src]="'factory.jpg' | assetsimage" class="image-cover" (click)="open(i)"/>
+        </div>
+      </ng-template>
+    </owl-carousel-o>
+  </div>
+</section>
+<section class="property-detail-wraper py-5 pb-4">
+  <div class="container">
+    <div class="aside-with-property-detail d-flex">
+      <!-- Property Detail -->
+      <div class="property-detail-container pe-3 col-md-9">
+        <!-- 1 -->
+        <div class="property-summry d-flex justify-content-between mb-3">
+          <div class="col-auto property-name px-2">
+            <h3 class="lh-sm fs-4">Property Name goes here</h3>
+            <span
+              class="d-inline-block sell-label px-2 py-1 rounded bg-secondary text-secondary-contrast"
+              >For Lease</span
+            >
+          </div>
+          <div class="col-auto property-address border-start px-3">
+            <address class="fs-6">
+              <span class="text-A700 d-block fs-5 font-primary-regular"
+                >VH6W+47X,
+              </span>
+              Bareja, <br />
+              Gujarat, India 382425
+            </address>
+          </div>
+          <div class="col-auto property-address border-start px-3">
+            <h4 class="text-A700 fs-3 font-primary-semibold mb-0">$ 15,000</h4>
+            <p class="fs-5">/ month</p>
+          </div>
+          <div class="col-auto property-address border-start px-3">
+            <h4 class="text-A700 fs-3 font-primary-semibold m-0">
+              Ready/Brownfield
+            </h4>
+            <p class="fs-5">Availability</p>
+          </div>
+          <div class="col-auto property-address px-2">
+            <a href="javascript:;" class="me-3">
+              <i class="fa fa-heart-o fs-3 text-secondary mt-1" aria-hidden="true"></i>
+            </a>
+            <!-- <a href="javascript:;" class="me-3">
+              <img
+                [src]="'icn_like_b.png' | assetsimage"
+                alt="icn_like_b"
+                class="img-fluid"
+              />
+            </a>
+            <a href="javascript:;" class="me-3">
+              <img
+                [src]="'icn_share_b.png' | assetsimage"
+                alt="icn_share_b"
+                class="img-fluid"
+              />
+            </a> -->
+          </div>
+        </div>
+        <!-- 2 -->
+        <div
+          class="property-summry bg-secondary-3 property-size-detail d-flex p-4 px-5 mb-3 justify-content-between"
+        >
+          <div class="col-auto-property-name ps-0 px-4">
+            <h4 class="text-A700 fs-4 font-primary-regular mb-0">
+              11,000 sq ft
+            </h4>
+            <p class="fs-6 m-0">Carpet Area</p>
+          </div>
+          <div class="col-auto-property-name ps-0 px-4">
+            <h4 class="text-A700 fs-4 font-primary-regular mb-0">
+              12,500 sq ft
+            </h4>
+            <p class="fs-6 m-0">Build-up Area</p>
+          </div>
+          <div class="col-auto-property-name ps-0 px-4">
+            <h4 class="text-A700 fs-4 font-primary-regular mb-0">
+              14,000 sq ft
+            </h4>
+            <p class="fs-6 m-0">Land Area</p>
+          </div>
+          <div class="col-auto-property-name ps-0 px-4">
+            <h4 class="text-A700 fs-4 font-primary-regular mb-0">
+              9,000 sq ft
+            </h4>
+            <p class="fs-6 m-0">Total Building Area</p>
+          </div>
+          <div class="col-auto-property-name ps-0 px-4">
+            <h4 class="text-A700 fs-4 font-primary-regular mb-0">
+              3,000 sq ft
+            </h4>
+            <p class="fs-6 m-0">Single Building Area</p>
+          </div>
+        </div>
+        <!-- 3 -->
+        <div class="property-description mb-3 border-bottom border-2 pb-4">
+          <p class="fs-5 m-0">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
+            dapibus tincidunt risus in condimentum. Morbi hendrerit eleifend
+            massa vitae aliquam. Donec dignissim gravida metus, nec volutpat
+            sapien maximus et. Etiam fringilla risus ac volutpat scelerisque.
+            Aliquam erat volutpat. Fusce bibendum, dui et pharetra sagittis,
+            mauris libero ornare tortor, et interdum nisl nulla at mi. Phasellus
+            bibendum rutrum lacus at dignissim. Ut leo nisi, dapibus vel
+            bibendum ac, placerat in magna. Proin maximus lectus quis purus
+            luctus, nec suscipit arcu consequat. Nulla molestie, elit vitae
+          </p>
+        </div>
+        <!-- 4 -->
+        <div class="property-description mb-3 border-bottom border-2">
+          <h4 class="fs-4 m-0">Property Details / Specifications</h4>
+          <div class="property-summry d-flex p-4 px-0 justify-content-between">
+            <div class="col-auto p-3">
+              <h4 class="text-A700 fs-4 font-primary-regular mb-0">
+                11,000 sq ft
+              </h4>
+              <p class="fs-6 m-0">Carpet Area</p>
+            </div>
+            <div class="col-auto p-3">
+              <h4 class="text-A700 fs-4 font-primary-regular mb-0">
+                12,500 sq ft
+              </h4>
+              <p class="fs-6 m-0">Build-up Area</p>
+            </div>
+            <div class="col-auto p-3">
+              <h4 class="text-A700 fs-4 font-primary-regular mb-0">
+                14,000 sq ft
+              </h4>
+              <p class="fs-6 m-0">Land Area</p>
+            </div>
+            <div class="col-auto p-3">
+              <h4 class="text-A700 fs-4 font-primary-regular mb-0">
+                9,000 sq ft
+              </h4>
+              <p class="fs-6 m-0">Total Building Area</p>
+            </div>
+            <div class="col-auto align-self-end">
+              <a
+                href="javascript:;"
+                class="btn btn-secondary text-secondary-contrast"
+                >View More</a
+              >
+            </div>
+          </div>
+        </div>
+        <!-- 5 -->
+        <div class="location">
+          <h4 class="fs-4 mb-3">Location</h4>
+          <div class="google-map border"></div>
+        </div>
+      </div>
+      <!-- Similler data -->
+      <div class="property-aside col-md-3">
+        <div class="micro-market-overview aside-card bg-secondary-3 p-2 py-3 mb-4">
+          <div class="aside-card-header d-flex border-primary pb-3 align-items-center justify-content-between border-bottom">
+            <h3 class="fs-4 mb-0">Micro-Market Overview</h3>
+            <a href="javascript:;" class="text-A700 font-primary-regular text-hover-primary text-primary-hover"
+              >Explore All</a
+            >
+          </div>
+          <div class="aside-card-body mt-3">
+            <app-micro-market-tile
+              *ngFor="let item of [1,2,3,4]"
+              [type]="'list'"
+                [image]="'factory.jpg' | assetsimage"
+                [title]="'Aslali - Kheda'"
+                [contnet]="
+                  'Lorem ipsum dolor sit amet,
+                  consectetur adipiscing elit.
+                  Quisque ac magna eget massa '
+                "
+                class="mb-2"
+              >
+              </app-micro-market-tile>
+          </div>
+        </div>
+        <div class="micro-market-overview aside-card bg-secondary-3 py-3 p-2">
+          <div class="aside-card-header d-flex border-primary pb-3 align-items-center justify-content-between border-bottom">
+            <h3 class="fs-4 mb-0">Similar properties</h3>
+            <a href="javascript:;" class="text-A700 font-primary-regular text-primary-hover"
+              >Explore All</a
+            >
+          </div>
+          <div class="aside-card-body mt-3">
+            <app-property-tile [type]="'list'" class="mb-2"></app-property-tile>
+            <app-property-tile [type]="'list'" class="mb-2"></app-property-tile>
+            <app-property-tile [type]="'list'" class="mb-2"></app-property-tile>
+            <app-property-tile [type]="'list'" class="mb-2"></app-property-tile>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="virtual-tour-wraper">
+  <div class="container">
+    <div class="virtual-tour-container py-3 border-top border-2">
+      <h4 class="fs-4 mb-3">Virtual Tour</h4>
+    </div>
+  </div>
+</section>
+
+
+<ng-template #searchButton>
+  <a
+    href="javascript:;"
+    class="fs-4 filter-toggle-button d-block bg-A700 filter-closed"
+    (click)="searchBarState.isShow = !searchBarState.isShow"
+  >
+    <i
+      class="fa text-primary-contrast"
+      [class.fa-angle-double-left]="searchBarState.isShow"
+      [class.fa-angle-double-right]="!searchBarState.isShow"
+    ></i>
+    <span
+      class="toggle-label text-primary-contrast d-block fs-6 mt-1 opacity-75"
+      >
+        <ng-container *ngIf="!searchBarState.isShow">Search</ng-container>
+        <ng-container *ngIf="searchBarState.isShow">Close</ng-container>
+      </span
+    >
+  </a>
+</ng-template>

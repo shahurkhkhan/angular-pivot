@@ -1,0 +1,149 @@
+<!-- Search property section  -->
+<section class="hero-section position-relative" >
+  <app-property-section></app-property-section>
+</section>
+<!-- Simple and Easy 4 Steps Process -->
+<section class="simple-and-easy-section py-5">
+  <div class="container">
+    <div class="sae-section-container">
+      <div class="section-header">
+        <h2 class="text-secondary-contrast text-center section-title">
+          Simple and Easy
+          <span class="highlight">4 Steps Process</span>
+        </h2>
+      </div>
+      <div class="section-content mt-5">
+        <div class="d-flex flex-wrap simple-steps">
+          <div
+            class="col-md-3 simple-step-column position-relative"
+            *ngFor="let step of getSimpleAndEasySteps(); let i = index"
+          >
+            <!-- icn_step_arrow_o.png -->
+            <div class="arrow-image" *ngIf="i">
+              <img
+                [src]="'icn_step_arrow_o.png' | assetsimage"
+                alt=""
+                height="20"
+              />
+            </div>
+            <div class="simple-step-column-innter">
+              <div
+                class="setp-number m-auto rounded-circle bg-secondary d-flex align-items-center justify-content-center"
+              >
+                <span class="text-secondary-contrast">
+                  {{ step.id }}
+                </span>
+              </div>
+              <div class="simple-step-contnet px-5">
+                <h3
+                  class="text-secondary-contrast text-center fw-bold fs-2 my-4"
+                >
+                  {{ step.title }}
+                </h3>
+                <p
+                  class="text-secondary-contrast text-center fs-4 lh-sm fw-normal"
+                >
+                  {{ step.content }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Micro Market Section -->
+<section id="micro" class="micro-market-section py-5">
+  <div class="container">
+    <div class="micro-market-section-container">
+      <div class="section-header">
+        <h2 class="text-center section-title">
+          Micro-Market
+          <span class="highlight text-secondary">Overviews</span>
+        </h2>
+      </div>
+      <div class="micro-market-content">
+        <div class="micro-market-search mb-2">
+          <div class="col-md-6 m-auto">
+            <app-location-search></app-location-search>
+          </div>
+        </div>
+        <div class="micro-market-slider col-md-11 m-auto position-relative">
+          <owl-carousel-o [options]="sliderConfigration">
+            <ng-template carouselSlide *ngFor="let market of [1, 2, 3, 4]">
+              <app-micro-market-tile
+                [image]="'factory.jpg' | assetsimage"
+                [title]="'Aslali - Kheda'"
+                [contnet]="
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+                "
+              >
+              </app-micro-market-tile>
+            </ng-template>
+          </owl-carousel-o>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Find Property Section -->
+<section class="container-fluid find-pro-section py-5 bg-primary">
+  <div class="container">
+    <div class="find-pro-section-container">
+      <div class="form-rows d-row">
+        <div class="col-md-6 find-property-form border-end border-white">
+          <div class="form-header border-bottom border-white">
+            <h3 class="text-center text-secondary-contrast fs-3 mb-1 lh-1">
+              Find Property
+            </h3>
+            <p class="text-center text-secondary-contrast fs-6">(Occupier)</p>
+          </div>
+          <app-property-find-form></app-property-find-form>
+        </div>
+        <div class="col-md-6 list-property-form">
+          <div class="form-header border-bottom border-white">
+            <h3 class="text-center text-secondary-contrast fs-3 mb-1 lh-1">
+              List Your Property
+            </h3>
+            <p class="text-center text-secondary-contrast fs-6">
+              (Developer / Builder / Land Owner)
+            </p>
+          </div>
+          <app-property-find-form></app-property-find-form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Clients Testimonials section -->
+<section class="container-fluid testimonial-section py-5">
+  <div class="container">
+    <div class="testimonial-section-container">
+      <div class="section-header">
+        <h2 class="text-center section-title">
+          Clients
+          <span class="highlight text-secondary">Testimonials</span>
+        </h2>
+      </div>
+      <div class="testimonial-slider col-md-11 m-auto position-relative">
+        <owl-carousel-o [options]="sliderConfigration">
+          <ng-template carouselSlide *ngFor="let market of [1, 2, 3, 4]">
+            <app-client-testimonial
+              [testimonial]="{
+                image: 'factory.jpg',
+                name: 'John Deo',
+                post: 'Vice President',
+                company: 'ABC Company',
+                rating: 5,
+                review:
+                  ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ac magna eget massa ultricies fringilla. Nulla vel cursus elit. Nullam rhoncus, purus ac ultrices consectetur, ipsum ipsum maximus '
+              }"
+            >
+            </app-client-testimonial>
+          </ng-template>
+        </owl-carousel-o>
+      </div>
+    </div>
+  </div>
+</section>
