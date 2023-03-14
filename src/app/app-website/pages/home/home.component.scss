@@ -1,0 +1,84 @@
+@use '/src/scss/theme/_theme' as theme;
+@import '/src/scss/theme/__theme_dir';
+@import '/node_modules/bootstrap/scss/bootstrap';
+:host {
+  display: block;
+  // Main Banner section
+  .map-and-listing-wraper {
+    height: 785px;
+  }
+  // Section 2
+  .simple-and-easy-section {
+    background: url('../../../../assets/images/factory.jpg');
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+    &:after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: rgba($color: map-get(theme.$pivot-palette, A700), $alpha: 0.9);
+      z-index: -1;
+    }
+    .setp-number {
+      width: 120px;
+      height: 120px;
+      span {
+        font-size: 4rem;
+      }
+    }
+    .arrow-image {
+      position: absolute;
+      left: 0;
+      top: 60px;
+      transform: translateX(-50%) translateY(-50%);
+    }
+  }
+
+  // Section 3
+  .testimonial-section,
+  .micro-market-section{
+    background-color: #f2f3f5;
+  }
+
+  // NG Deep
+  &::ng-deep {
+    .owl-item {
+      padding: 1.5rem 0.7rem
+    }
+    .owl-nav {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      .owl-prev,
+      .owl-next {
+        top: 50%;
+        transform: translateY(-50%);
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: theme.$secondary;
+        .fa {
+          font-size: 1rem;
+        }
+      }
+      .owl-prev {
+        position: absolute;
+        left: -70px;
+      }
+      .owl-next {
+        position: absolute;
+        right: -70px;
+      }
+    }
+  }
+}

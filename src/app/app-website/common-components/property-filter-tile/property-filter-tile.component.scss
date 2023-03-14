@@ -1,0 +1,57 @@
+@use '/src/scss/theme/_theme' as theme;
+
+:host {
+  &.app-property-filter-tile {
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    .property-type-icon {
+      width: 30px;
+      height: 30px;
+      overflow: hidden;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: scale-down;
+      }
+    }
+    // Checkbox
+    &::ng-deep {
+      .property-toggle {
+        mat-button-toggle {
+          height: 80px;
+          width: 120px;
+        }
+      }
+      .mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__native-control:enabled:not(:checked):not(:indeterminate):not([data-indeterminate=true])~.mdc-checkbox__background {
+        border-color: theme.$secondary;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+      }
+      .mdc-checkbox__background {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+      }
+      .mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__background {
+          top: calc((var(--mdc-checkbox-state-layer-size, 40px) - 24px) / 2);
+          left: calc((var(--mdc-checkbox-state-layer-size, 40px) - 24px) / 2);
+      }
+      .mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background, .mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__native-control:enabled:indeterminate~.mdc-checkbox__background, .mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__native-control[data-indeterminate=true]:enabled~.mdc-checkbox__background {
+        background-color: #fff;
+      }
+      .mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__native-control:enabled~.mdc-checkbox__background .mdc-checkbox__checkmark {
+        color : theme.$secondary;
+        width: 1rem;
+        height: 1rem;
+        margin-top: 3px;
+        margin-left: 2px;
+      }
+    }
+    .property-filter-try-container {
+      max-width: 320px;
+      margin: 0 auto;
+    }
+  }
+}

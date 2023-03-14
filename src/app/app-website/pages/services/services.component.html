@@ -1,0 +1,78 @@
+<div class="services position-relative py-5">
+  <div class="container">
+    <h2 class="fs-2 text-black mb-4">Our Services</h2>
+
+    <div class="all-top-services d-row">
+      <div class="col-md-6 service-column d-flex align-items-center mb-5">
+        <div class="service-icon p-0">
+            <img [src]="'icn_service_leasing.png' | assetsimage" class="img-fluid">
+        </div>
+        <div class="service-detail ps-5">
+          <h3 class="fs-2 text-A700">Leasing</h3>
+          <p class="fs-3 lh-1 m-0">Brownfield Asset Acquisition / Ready to Move
+            Greenfield Asset Acquisition / Built to Suit</p>
+        </div>
+      </div>
+      <div class="col-md-6 service-column d-flex align-items-center mb-5">
+        <div class="service-icon  p-0">
+            <img [src]="'icn_service_investment.png' | assetsimage" class="img-fluid">
+        </div>
+        <div class="service-detail ps-5">
+          <h3 class="fs-2 text-A700">Investment Sales
+          </h3>
+          <p class="fs-3 lh-1 m-0">Pre-Leased & Forward Sale of rent yielding
+            Industrial & Logistics Assets</p>
+        </div>
+      </div>
+      <div class="col-md-6 service-column d-flex align-items-center mb-5">
+        <div class="service-icon  p-0">
+            <img [src]="'icn_service_facility.png' | assetsimage" class="img-fluid">
+        </div>
+        <div class="service-detail ps-5">
+          <h3 class="fs-2 text-A700">Industrial / Warehousing Facility</h3>
+          <p class="fs-3 lh-1 m-0">Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit.</p>
+        </div>
+      </div>
+      <div class="col-md-6 service-column d-flex align-items-center mb-5">
+        <div class="service-icon  p-0">
+            <img [src]="'icn_service_land.png' | assetsimage" class="img-fluid">
+        </div>
+        <div class="service-detail ps-5">
+          <h3 class="fs-2 text-A700">Land</h3>
+          <p class="fs-3 lh-1 m-0">Land Acquisition, Land Divestment,
+            Location Advisory</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Find Property Section -->
+<section class="container-fluid find-pro-section py-5 bg-primary">
+  <div class="container">
+    <div class="find-pro-section-container">
+      <div class="form-rows d-row">
+        <div class="col-md-6 find-property-form border-end border-white">
+          <div class="form-header border-bottom border-white">
+            <h3 class="text-center text-secondary-contrast fs-3 mb-1 lh-1">
+              Find Property
+            </h3>
+            <p class="text-center text-secondary-contrast fs-6">(Occupier)</p>
+          </div>
+          <app-property-find-form></app-property-find-form>
+        </div>
+        <div class="col-md-6 list-property-form">
+          <div class="form-header border-bottom border-white">
+            <h3 class="text-center text-secondary-contrast fs-3 mb-1 lh-1">
+              List Your Property
+            </h3>
+            <p class="text-center text-secondary-contrast fs-6">
+              (Developer / Builder / Land Owner)
+            </p>
+          </div>
+          <app-property-find-form></app-property-find-form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

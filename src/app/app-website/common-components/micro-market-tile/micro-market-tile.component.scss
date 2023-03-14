@@ -1,0 +1,24 @@
+:host {
+  .card {
+    overflow: hidden;
+  }
+  .tile-grid {
+    .market-image {
+      height: 240px;
+    }
+  }
+  .tile-list {
+    .market-image {
+    height: 70px;
+    }
+  }
+  .market-image {
+    background-color: #ddd;
+    overflow: hidden;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}

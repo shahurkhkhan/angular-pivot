@@ -1,0 +1,64 @@
+@import '/node_modules/bootstrap/scss/bootstrap';
+
+body { font-family: 'Proxima Nova Regular' !important; }
+h1, h2, h3, h4 {
+  font-family: 'Proxima Nova Bold' !important;
+}
+
+h5, h6 {
+  font-family: 'Proxima Nova Semibold' !important;
+}
+
+p, ul, li, a, span {
+  font-family: 'Proxima Nova Light' !important;
+}
+
+.font-primary-regular {
+  font-family: 'Proxima Nova Regular' !important;
+}
+.font-primary-bold {
+  font-family: 'Proxima Nova Bold' !important;
+}
+.font-primary-semibold {
+  font-family: 'Proxima Nova Semibold' !important;
+}
+.font-primary-light {
+  font-family: 'Proxima Nova Light' !important;
+}
+.font-primary-thin {
+  font-family: 'Proxima Nova Thin' !important;
+}
+
+
+mat-option {
+  font-size: 1rem;
+  @extend .font-primary-semibold;
+}
+
+
+// pages
+.section-title {
+  @extend  .fs-2;
+  .highlight {
+    @extend  .fs-2, .font-primary-bold;
+    color: #FFBC00;
+  }
+}
+
+
+.d-row {
+  display: flex;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  max-width: 100%;
+  padding-right: calc(var(--bs-gutter-x) * 0.5);
+  padding-left: calc(var(--bs-gutter-x) * 0.5);
+  margin-top: var(--bs-gutter-y);
+  * {
+    padding-right: calc(var(--bs-gutter-x) * 0.5);
+    padding-left: calc(var(--bs-gutter-x) * 0.5);
+    margin-top: var(--bs-gutter-y);
+  }
+}
+
+
