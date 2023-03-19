@@ -5,8 +5,6 @@
   }
   .google-map {
     height: 500px;
-    background-image: url('../../../../../../assets/images/map-location.png');
-    background-size: contain;
   }
   .bg-secondary-3 {
     background-color: rgba($color: theme.$secondary, $alpha: 0.3);
@@ -45,6 +43,9 @@
       top: 0;
       right: 40px;
     }
-
+    .map-container {
+      width: 100% !important;
+      height: 100% !important;
+    }
   }
 }
