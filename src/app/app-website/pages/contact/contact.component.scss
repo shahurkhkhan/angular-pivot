@@ -1,7 +1,12 @@
 :host {
   .contact-map-wraper {
     height: 640px;
-    background-image: url('../../../../assets/images/map-location.png');
-    background-size: cover;
+  }
+
+  &::ng-deep {
+    .map-container {
+      width: 100% !important;
+      height: 100% !important;
+    }
   }
 }

@@ -155,7 +155,12 @@
         <!-- 5 -->
         <div class="location">
           <h4 class="fs-4 mb-3">Location</h4>
-          <div class="google-map border"></div>
+          <div class="google-map border">
+            <google-map class="w-100 h-100"
+              [center]="googleMapConfig.center"
+              [zoom]="googleMapConfig.zoom">
+            </google-map>
+          </div>
         </div>
       </div>
       <!-- Similler data -->

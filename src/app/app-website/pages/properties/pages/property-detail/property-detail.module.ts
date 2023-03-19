@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+
 import { CommonModule } from '@angular/common';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { PropertyDetailComponent } from './property-detail.component';
@@ -8,6 +8,8 @@ import { MicroMarketTileComponent } from 'src/app/app-website/common-components/
 import { PropertyTileComponent } from 'src/app/app-website/common-components/property-tile/property-tile.component';
 import { LightboxModule } from 'ngx-lightbox';
 import { PropertySectionComponent } from 'src/app/app-website/common-components/property-section/property-section.component';
+import { NgModule } from '@angular/core';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 
 const routes: Routes = [
@@ -29,6 +31,7 @@ const routes: Routes = [
     PropertySectionComponent,
     LightboxModule,
     CarouselModule,
+    GoogleMapsModule,
     RouterModule.forChild(routes)
   ]
 })

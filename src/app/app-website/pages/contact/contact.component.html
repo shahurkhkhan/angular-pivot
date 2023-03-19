@@ -74,7 +74,10 @@
   </div>
 </section>
 <section class="contact-map-wraper position-relative">
-
+  <google-map class="w-100 h-100"
+    [center]="googleMapConfig.center"
+    [zoom]="googleMapConfig.zoom">
+  </google-map>
 </section>
 <!-- Find Property Section -->
 <section class="container-fluid find-pro-section py-5 bg-primary">
