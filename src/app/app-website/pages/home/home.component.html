@@ -127,22 +127,34 @@
         </h2>
       </div>
       <div class="testimonial-slider col-md-11 m-auto position-relative">
-        <owl-carousel-o [options]="sliderConfigration">
-          <ng-template carouselSlide *ngFor="let market of [1, 2, 3, 4]">
-            <app-client-testimonial
-              [testimonial]="{
-                image: 'factory.jpg',
-                name: 'John Deo',
-                post: 'Vice President',
-                company: 'ABC Company',
-                rating: 5,
-                review:
-                  ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ac magna eget massa ultricies fringilla. Nulla vel cursus elit. Nullam rhoncus, purus ac ultrices consectetur, ipsum ipsum maximus '
-              }"
-            >
-            </app-client-testimonial>
-          </ng-template>
-        </owl-carousel-o>
+        <app-ngrxdata [isDefaultLoader]="false" [selector]="testimonialSelectors" #selector="ngrxdata">
+          <app-nx-data>
+            <owl-carousel-o [options]="sliderConfigration">
+              <ng-template carouselSlide *ngFor="let testimonial of selector.content.data">
+                <app-client-testimonial
+                  [testimonial]="{
+                    image: testimonial['file'],
+                    name: testimonial['name'],
+                    post: testimonial['position'],
+                    company: 'ABC Company',
+                    rating: testimonial['stars'],
+                    review: testimonial['comment']
+                  }"
+                >
+                </app-client-testimonial>
+              </ng-template>
+            </owl-carousel-o>
+          </app-nx-data>
+          <app-nx-loader class="mt-2">
+            <ngx-skeleton-loader count="3"  [theme]="{
+              'border-radius': '5px',
+              height: '440px',
+              width: 'calc(94% / 3)',
+              margin: '1%',
+              'background-color': '#ddd'
+            }"></ngx-skeleton-loader>
+          </app-nx-loader>
+        </app-ngrxdata>
       </div>
     </div>
   </div>

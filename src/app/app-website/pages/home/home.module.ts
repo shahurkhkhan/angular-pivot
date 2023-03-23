@@ -15,6 +15,9 @@ import { PropertyFindFormComponent } from '../../common-components/property-find
 
 import {MatSelectModule} from '@angular/material/select';
 import { PropertySectionComponent } from '../../common-components/property-section/property-section.component';
+import { HomeStore } from './shared/stores/home.store';
+import { NgrxdataModule } from 'src/app/shared/modules/ngrxdata/ngrxdata.module';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 
 
@@ -39,12 +42,17 @@ const routes: Route[] = [
 
     CarouselModule,
     MatSelectModule,
+    NgxSkeletonLoaderModule,
 
 
     // Shared
     SharedPipesModule,
+    NgrxdataModule,
 
     RouterModule.forChild(routes)
+  ],
+  providers: [
+    HomeStore
   ]
 })
 export class HomeModule { }

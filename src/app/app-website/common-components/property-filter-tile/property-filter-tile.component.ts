@@ -5,6 +5,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSliderModule} from '@angular/material/slider';
+import { DeviceDetectService } from 'src/app/core/services/device-detect.service';
 import { SharedPipesModule } from 'src/app/shared/pipes/shared-pipes.module';
 @Component({
   selector: 'app-property-filter-tile',
@@ -23,10 +24,11 @@ import { SharedPipesModule } from 'src/app/shared/pipes/shared-pipes.module';
 })
 export class PropertyFilterTileComponent {
   @HostBinding('class')
-  public hostClass = 'app-property-filter-tile bg-primary';
+  public hostClass = `app-property-filter-tile bg-primary ${this._device.getMediaQueryName()}`;
   public formGroup: FormGroup;
   constructor(
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private _device: DeviceDetectService
   ) {
     this.formGroup = this._formBuilder.group({
       property: ['lease'],

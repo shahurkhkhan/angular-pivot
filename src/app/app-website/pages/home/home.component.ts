@@ -1,7 +1,8 @@
-import { DOCUMENT } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, Inject, Renderer2, ViewChild } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { SimpleStep } from './shared/interfaces/simple-step.interface';
+import { HomeStore } from './shared/stores/home.store';
+import { Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -45,13 +46,16 @@ export class HomeComponent implements AfterViewInit {
     navText: ['<i class="fa fa-arrow-left"></i>', '<i class="fa fa-arrow-right"></i>']
   }
 
-
-  constructor() {
+  // APi
+  public testimonialSelectors = this._homeStore.moduleListSelector('testimonials');
+  constructor(
+    private _homeStore: HomeStore,
+    private _meta: Meta
+  ) {
+    this.testimonialSelectors.getList$.subscribe(console.log)
+    this._homeStore.getTestimonial({});
   }
 
   ngAfterViewInit(): void {
   }
-
-
-
 }
