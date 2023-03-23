@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatButtonModule } from '@angular/material/button'
+import { ApiService } from './core/services/api.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent
@@ -14,9 +16,17 @@ import { MatButtonModule } from '@angular/material/button'
     BrowserModule,
     AppRoutingModule,
     MatButtonModule,
+    HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    ApiService,
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: HeaderInterceptor,
+    //   multi: true
+    // },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

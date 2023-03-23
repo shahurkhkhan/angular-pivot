@@ -1,0 +1,23 @@
+<ng-content select="app-nx-data"></ng-content>
+<!-- Loader -->
+<ng-container *ngIf="isDefaultLoader && (selector.isSend$ | async); else loaderTemp">
+  <app-nx-loader>
+    <h3 class="text-center fs-2">Loading...</h3>
+  </app-nx-loader>
+</ng-container>
+<!-- // Error -->
+<ng-container *ngIf="isDefaultError && (selector.isFailed$ | async); else errorTemp">
+  <app-nx-error>
+    <h3 class="text-center fs-2">Something went wrong</h3>
+    <p class="text-center fs-4">Please try again.</p>
+    <p class="text-center fs-4">{{content.errorMsg}}</p>
+  </app-nx-error>
+</ng-container>
+
+<!-- Temps -->
+<ng-template #errorTemp>
+  <ng-content select="app-nx-error" *ngIf="selector.isFailed$ | async"></ng-content>
+</ng-template>
+<ng-template #loaderTemp>
+  <ng-content select="app-nx-loader" *ngIf="selector.isSend$ | async"></ng-content>
+</ng-template>

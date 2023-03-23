@@ -5,8 +5,9 @@
 export const environment = {
   production: true,
   ASSETS_BASE_URL: 'https://dev.assets.firstservicenow.com',
+  API_BASE_URL: 'https://pivot-technology.com/be/public/api/',
   ROUTES_CONFIG: {
-    AUTHENTICATION: "auth",
+    CLIENT_TESTIMONIALS: "clientTestimonials",
   }
 };
 

@@ -11,3 +11,9 @@ a:hover, a:focus {
   color: white !important;
 }
 
+// Media
+@media screen and (max-width: 1400px) {
+  html {
+    font-size: 14px;
+  }
+}

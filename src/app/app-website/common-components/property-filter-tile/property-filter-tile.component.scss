@@ -15,12 +15,18 @@
         object-fit: scale-down;
       }
     }
+    .property-filter-try-container {
+      max-width: 320px;
+      margin: 0 auto;
+    }
+
     // Checkbox
     &::ng-deep {
       .property-toggle {
         mat-button-toggle {
           height: 80px;
-          width: 120px;
+          max-width: 120px;
+          width: 50%;
         }
       }
       .mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__native-control:enabled:not(:checked):not(:indeterminate):not([data-indeterminate=true])~.mdc-checkbox__background {
@@ -49,9 +55,19 @@
         margin-left: 2px;
       }
     }
-    .property-filter-try-container {
-      max-width: 320px;
-      margin: 0 auto;
+
+
+    &.xl {
+      &::ng-deep {
+        .property-toggle {
+          mat-button-toggle {
+            height: 80px;
+            width: 80px;
+          }
+        }
+      }
     }
   }
 }
+
+
