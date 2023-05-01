@@ -1,10 +1,12 @@
 :host {
-  .client-avatar {
-    width: 7rem;
-    height: 7rem;
-    overflow: hidden;
-  }
-  .client-rate {
-    mat-icon {color: #ffbc00}
+  &.app-client-testimonial {
+    .client-avatar {
+      width: 7rem;
+      height: 7rem;
+      overflow: hidden;
+    }
+    .client-rate {
+      mat-icon {color: #ffbc00}
+    }
   }
 }

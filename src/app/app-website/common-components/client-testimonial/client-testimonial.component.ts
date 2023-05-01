@@ -17,6 +17,4 @@ export class ClientTestimonialComponent {
   public hostClass = 'd-block app-client-testimonial';
   @Input()
   public testimonial: any;
-  @Input()
-  public loading: any = false;
 }

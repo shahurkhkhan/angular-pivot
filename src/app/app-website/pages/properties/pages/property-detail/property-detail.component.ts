@@ -1,6 +1,7 @@
 import { Component, HostBinding } from '@angular/core';
 import { Lightbox } from 'ngx-lightbox';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { PropertyDetailStore } from '../shared/services/property-detail.store';
 interface IGoogleMapConfig {
   center: google.maps.LatLngLiteral,
   zoom: number
@@ -27,7 +28,10 @@ export class PropertyDetailComponent {
     navText: ['<i class="fa fa-arrow-left"></i>', '<i class="fa fa-arrow-right"></i>']
   }
 
-  constructor(private _lightbox: Lightbox) {
+  constructor(
+    private _lightbox: Lightbox,
+    private _propertyDetailStore: PropertyDetailStore
+  ) {
     this.googleMapConfig.center = {} as any;
     this.googleMapConfig.center.lat = 25.789801;
     this.googleMapConfig.center.lng = 73.327797;
@@ -45,15 +49,16 @@ export class PropertyDetailComponent {
       };
       this.albums.push(album);
     }
+
+    // Get Detail
+    this._propertyDetailStore.getProperty(2)
   }
 
   open(index: number): void {
-    // open lightbox
     this._lightbox.open(this.albums, index);
   }
 
   close(): void {
-    // close lightbox programmatically
     this._lightbox.close();
   }
 }

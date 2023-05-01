@@ -1,23 +1,34 @@
+<!-- Data Block -->
 <ng-content select="app-nx-data"></ng-content>
-<!-- Loader -->
-<ng-container *ngIf="isDefaultLoader && (selector.isSend$ | async); else loaderTemp">
-  <app-nx-loader>
-    <h3 class="text-center fs-2">Loading...</h3>
-  </app-nx-loader>
+
+<!-- Loader Block-->
+<ng-container *ngIf="isDefaultLoader; else loaderTemp">
+  <ng-container *ngIf="content.isSend && !content.isAgain">
+    <app-nx-loader [isDefault]="true"></app-nx-loader>
+  </ng-container>
 </ng-container>
-<!-- // Error -->
-<ng-container *ngIf="isDefaultError && (selector.isFailed$ | async); else errorTemp">
-  <app-nx-error>
-    <h3 class="text-center fs-2">Something went wrong</h3>
-    <p class="text-center fs-4">Please try again.</p>
-    <p class="text-center fs-4">{{content.errorMsg}}</p>
-  </app-nx-error>
+<ng-container *ngIf="isDefaultLoaderAgain && content.isAgain">
+  <app-nx-loader [isDefault]="true" type="again"></app-nx-loader>
+</ng-container>
+<!-- Error Block -->
+<ng-container *ngIf="isDefaultError; else errorTemp">
+  <app-nx-error *ngIf="content.isFailed"></app-nx-error>
+</ng-container>
+<!-- No data Block -->
+<ng-container *ngIf="isDefaultNoData; else nodataTemp">
+  <app-nx-nodata *ngIf="content.isDone && !content.data?.length && !content.isFailed"></app-nx-nodata>
 </ng-container>
 
 <!-- Temps -->
-<ng-template #errorTemp>
-  <ng-content select="app-nx-error" *ngIf="selector.isFailed$ | async"></ng-content>
-</ng-template>
 <ng-template #loaderTemp>
-  <ng-content select="app-nx-loader" *ngIf="selector.isSend$ | async"></ng-content>
+  <ng-content select="app-nx-loader" *ngIf="content.isSend"></ng-content>
+</ng-template>
+<ng-template #errorTemp>
+  <ng-content select="app-nx-error" *ngIf="content.isFailed"></ng-content>
+</ng-template>
+<ng-template #nodataTemp>
+  <ng-content
+    select="app-nx-nodata"
+    *ngIf="content.isDone && !content.data?.length && !content.isFailed"
+  ></ng-content>
 </ng-template>

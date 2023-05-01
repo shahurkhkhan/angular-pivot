@@ -24,4 +24,27 @@ export class HomeService {
       }
     )
   }
+
+  public getMicroMarkets(
+    locationId: string,
+    payload: any
+  ): Observable<ApiResponce> {
+    return this._api.get(
+      `${this._apiRoute.url('LOCATIONS')}/${locationId}/market`,
+      {
+        params: payload
+      }
+    )
+  }
+
+  public getLocations(
+    payload: any
+  ): Observable<ApiResponce> {
+    return this._api.get(
+      this._apiRoute.url('LOCATIONS'),
+      {
+        params: payload
+      }
+    )
+  }
 }

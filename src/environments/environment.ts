@@ -8,6 +8,10 @@ export const environment = {
   API_BASE_URL: 'https://pivot-technology.com/be/public/api/',
   ROUTES_CONFIG: {
     CLIENT_TESTIMONIALS: "clientTestimonials",
+    MICRO_MARKETS: "location_market",
+    LOCATIONS: "location",
+    PROPERTIES: 'properties',
+    PROPERTY_STATIC_DATA: 'sitestatics'
   }
 };
 

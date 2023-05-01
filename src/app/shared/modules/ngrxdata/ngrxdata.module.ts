@@ -4,6 +4,7 @@ import { NgrxdataComponent } from './ngrxdata.component';
 import { NxErrorComponent } from './components/nx-error/nx-error.component';
 import { NxLoaderComponent } from './components/nx-loader/nx-loader.component';
 import { NxDataComponent } from './components/nx-data/nx-data.component';
+import { NxNodataComponent } from './components/nx-nodata/nx-nodata.component';
 
 
 @NgModule({
@@ -11,13 +12,14 @@ import { NxDataComponent } from './components/nx-data/nx-data.component';
     NgrxdataComponent,
     NxErrorComponent,
     NxLoaderComponent,
-    NxDataComponent
+    NxDataComponent,
+    NxNodataComponent
   ],
   exports: [
     NgrxdataComponent,
     NxErrorComponent,
     NxLoaderComponent,
-    NxDataComponent
+    NxDataComponent,NxNodataComponent
   ],
   imports: [
     CommonModule

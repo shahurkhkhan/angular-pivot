@@ -1,120 +1,95 @@
 import { ComponentStore } from '@ngrx/component-store';
 import { filter, map, Observable, switchMapTo } from 'rxjs';
-import { NgrxListSelector, NgRxState } from '../interfaces/general.interface';
+import {
+  ActionSelector
+} from '../interfaces/general.interface';
 
-export class ServiceStore<T> extends ComponentStore<any>{
-    // List data
-    public listData$: Observable<any[]> = this.select(({ listData }) => {
-        return listData;
-    });
+interface IUseActionPayload {
+  statusKey: string;
+  moduleKey: any;
+  datakey: string;
+}
 
-    // Paginator
-    public paginator$: Observable<any> = this.select(({ paginator }) => {
-        return paginator;
-    });
+export class ServiceStore<T> extends ComponentStore<any> {
+  constructor(defaultState: T) {
+    super(defaultState);
+  }
 
-    // constructor
-    constructor(
-        defaultState: T
-    ) {
-        super(defaultState)
-    }
+  // State
+  public moduleState<K extends keyof T>(key: K | undefined) {
+    return this.select((state: T) => (key ? state[key] : state));
+  }
 
-    // Selectors
-    public listSelector(): NgrxListSelector<T[]> {
-        const selector$ = {} as NgrxListSelector<T[]>;
-        selector$.getList$ = this.select(({ listData }) => listData);
-        selector$.paginator$ = this.paginator$;
-        selector$.isDone$ = this.select(({ status }) => status.getListStatus).pipe(
-            map(status => status === 'listRequestSuccess' || status === 'listRequestFailed')
-        );
-        selector$.isSend$ = this.select(({ status }) => status?.getListStatus).pipe(
-            map(status => status === 'listRequestSent')
-        );
-        selector$.isAgain$ = this.select(({ status }) => status?.getListStatus).pipe(
-            map(status => status === 'listRequestSentAgain')
-        );
-        selector$.isFailed$ = this.select(({ status }) => status?.getListStatus).pipe(
-            map(status => status === 'listRequestFailed')
-        );
-        selector$.isSuccess$ = this.select(({ status }) => status?.getListStatus).pipe(
-            map(status => status === 'listRequestSuccess')
-        );
-        selector$.errorMsg$ = selector$.isFailed$.pipe(
-            filter(d => !!d),
-            switchMapTo(this.select(({ errorMessage }) => errorMessage?.getListStatus)),
-            filter(d => !!d)
-        );
-        selector$.successMsg$ = selector$.isSuccess$.pipe(
-            filter(d => !!d),
-            switchMapTo(this.select(({ successMessage }) => successMessage?.getListStatus)),
-            filter(d => !!d)
-        );
-        return selector$;
-    }
-
-    // Feature module
-    public moduleStateUpdate<K extends keyof T>(moduleState: T[K] | any, key: K) {
-      this.patchState((state) => ({
-        ...state,
-        [key]: {
-          ...state[key],
-          ...moduleState
-        }
-      }));
-    }
-
-    // ModuleState
-    public moduleState<K extends keyof T> (key: K){
-      return this.select((state: T) => state[key])
-    }
-
-    public moduleListSelector<K extends keyof T>(key: K) {
-      const selector$ = {} as NgrxListSelector<any[]>;
-        selector$.getList$ = this.moduleState(key).pipe(
-         map((state: any) => state?.listData)
+  // Selector
+  public useSelector = <T>(criteria: IUseActionPayload) => {
+    const { statusKey, moduleKey, datakey } = criteria;
+    const selector = {} as ActionSelector<T>;
+    selector.state$ = this.moduleState(moduleKey);
+    selector.data$ = this.moduleState(moduleKey).pipe(
+      map((state: any) =>
+        state?.hasOwnProperty(datakey) ? state[datakey] : null
+      )
+    );
+    selector.isDone$ = this.moduleState(moduleKey).pipe(
+      map((state: any) =>
+        state?.status?.hasOwnProperty(datakey) ? state?.status[datakey] : null
+      ),
+      map(
+        (status) =>
+          status === `${statusKey}RequestSuccess` ||
+          status === `${statusKey}RequestFailed`
+      )
+    );
+    selector.isSend$ = this.moduleState(moduleKey).pipe(
+      map((state: any) =>
+        state?.status?.hasOwnProperty(datakey) ? state?.status[datakey] : null
+      ),
+      map((status) => status === `${statusKey}RequestSent`)
+    );
+    selector.isAgain$ = this.moduleState(moduleKey).pipe(
+      map((state: any) =>
+        state?.status?.hasOwnProperty(datakey) ? state?.status[datakey] : null
+      ),
+      map((status) => status === `${statusKey}RequestSentAgain`)
+    );
+    selector.isFailed$ = this.moduleState(moduleKey).pipe(
+      map((state: any) =>
+        state?.status?.hasOwnProperty(datakey) ? state?.status[datakey] : null
+      ),
+      map((status) => status === `${statusKey}RequestFailed`)
+    );
+    selector.isSuccess$ = this.moduleState(moduleKey).pipe(
+      map((state: any) =>
+        state?.status?.hasOwnProperty(datakey) ? state?.status[datakey] : null
+      ),
+      map((status) => status === `${statusKey}RequestSuccess`)
+    );
+    selector.errorMsg$ = selector.isFailed$.pipe(
+      filter((d) => !!d),
+      switchMapTo(
+        this.moduleState(moduleKey).pipe(
+          map((state: any) =>
+            state?.errorMessage?.hasOwnProperty(datakey)
+              ? state?.errorMessage[datakey]
+              : null
+          )
         )
-        selector$.paginator$ = this.moduleState(key).pipe(
-          map((state: any) => state?.paginator)
-         );
-        selector$.isDone$ = this.moduleState(key).pipe(
-          map((state: any) => state?.status?.getListStatus),
-          map(status => status === 'listRequestSuccess' || status === 'listRequestFailed')
+      ),
+      filter((d) => !!d)
+    );
+    selector.successMsg$ = selector.isSuccess$.pipe(
+      filter((d) => !!d),
+      switchMapTo(
+        this.moduleState(moduleKey).pipe(
+          map((state: any) =>
+            state?.successMessage?.hasOwnProperty(datakey)
+              ? state?.successMessage[datakey]
+              : null
+          )
         )
-        selector$.isSend$ = this.moduleState(key).pipe(
-          map((state: any) => state?.status?.getListStatus),
-          map(status => status === 'listRequestSent')
-        )
-        selector$.isAgain$ = this.moduleState(key).pipe(
-          map((state: any) => state?.status?.getListStatus),
-          map(status => status === 'listRequestSentAgain')
-        )
-        selector$.isFailed$ = this.moduleState(key).pipe(
-          map((state: any) => state?.status?.getListStatus),
-          map(status => status === 'listRequestFailed')
-        )
-        selector$.isSuccess$ = this.moduleState(key).pipe(
-          map((state: any) => state?.status?.getListStatus),
-          map(status => status === 'listRequestSuccess')
-        )
-        selector$.errorMsg$ = selector$.isFailed$.pipe(
-            filter(d => !!d),
-            switchMapTo(
-              this.moduleState(key).pipe(
-                map((state: any) => state?.errorMessage?.getListStatus)
-              )
-            ),
-            filter(d => !!d)
-        );
-        selector$.successMsg$ = selector$.isSuccess$.pipe(
-            filter(d => !!d),
-            switchMapTo(
-              this.moduleState(key).pipe(
-                map((state: any) => state?.successMessage?.getListStatus)
-              )
-            ),
-            filter(d => !!d)
-        );
-        return selector$;
-    }
+      ),
+      filter((d) => !!d)
+    );
+    return selector;
+  };
 }

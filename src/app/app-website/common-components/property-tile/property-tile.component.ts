@@ -2,6 +2,7 @@ import { Component, HostBinding, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedPipesModule } from 'src/app/shared/pipes/shared-pipes.module';
 import { RouterModule } from '@angular/router';
+import { IProperty } from 'src/app/core/interfaces/property.interface';
 
 @Component({
   selector: 'app-property-tile',
@@ -19,4 +20,6 @@ export class PropertyTileComponent {
   public hostClass = 'app-property-tile d-block';
   @Input()
   public type: 'list' | 'grid' = 'grid';
+  @Input()
+  public property: IProperty = {} as IProperty;
 }

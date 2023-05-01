@@ -1,5 +1,5 @@
-import { AfterContentInit, AfterViewInit, Component, HostBinding, Input } from '@angular/core';
-import { NgrxListSelector } from 'src/app/core/interfaces/general.interface';
+import { AfterViewInit, Component, HostBinding, Input } from '@angular/core';
+import { ActionSelector } from 'src/app/core/interfaces/general.interface';
 
 interface ISelectorData {
   data: any,
@@ -12,6 +12,7 @@ interface ISelectorData {
   isAgain: boolean,
   successMsg: any,
   errorMsg: any,
+  state: any
 }
 
 @Component({
@@ -24,11 +25,16 @@ export class NgrxdataComponent implements AfterViewInit {
   @HostBinding('class')
   public hostClass = 'app-ngrxdata d-block';
   @Input()
-  public selector!: NgrxListSelector<any>;
+  public selector!: ActionSelector<any>;
   @Input()
   public isDefaultError: boolean = true;
   @Input()
   public isDefaultLoader: boolean = true;
+  @Input()
+  public isDefaultLoaderAgain: boolean = true;
+  @Input()
+  public isDefaultNoData: boolean = true;
+
 
   public content: ISelectorData = {} as ISelectorData;
 
@@ -36,10 +42,11 @@ export class NgrxdataComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.selector?.getList$.subscribe(d => this.content.data = d);
+    this.selector?.state$.subscribe(d => this.content.state = d);
+    this.selector?.data$.subscribe(d => this.content.data = d);
     this.selector?.isSend$.subscribe(d => this.content.isSend = d);
-    this.selector?.paginator$.subscribe(d => this.content.paginator = d);
-    this.selector?.isFetching$.subscribe(d => this.content.isFetching = d);
+    // this.selector?.paginator$.subscribe(d => this.content.paginator = d);
+    // this.selector?.isFetching$?.subscribe(d => this.content.isFetching = d);
     this.selector?.isDone$.subscribe(d => this.content.isDone = d);
     this.selector?.isFailed$.subscribe(d => this.content.isFailed = d);
     this.selector?.isSuccess$.subscribe(d => this.content.isSuccess = d);

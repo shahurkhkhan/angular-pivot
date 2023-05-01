@@ -10,6 +10,7 @@ import { LightboxModule } from 'ngx-lightbox';
 import { PropertySectionComponent } from 'src/app/app-website/common-components/property-section/property-section.component';
 import { NgModule } from '@angular/core';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { PropertyDetailStore } from '../shared/services/property-detail.store';
 
 
 const routes: Routes = [
@@ -33,6 +34,9 @@ const routes: Routes = [
     CarouselModule,
     GoogleMapsModule,
     RouterModule.forChild(routes)
+  ],
+  providers: [
+    PropertyDetailStore
   ]
 })
 export class PropertyDetailModule { }

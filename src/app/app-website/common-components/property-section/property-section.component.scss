@@ -1,96 +1,100 @@
 @use '/src/scss/theme/_theme' as theme;
 @import '/src/scss/theme/__theme_dir';
+@import '/src/scss/abstracts/loop';
 @import '/node_modules/bootstrap/scss/bootstrap';
 :host {
-  // Filter
-  .filtered-list-actions {
-    .filter-view-change-action {
-      width: 36px;
-      height: 36px;
-      @extend  .border, .d-flex, .align-items-center, .justify-content-center, .bg-white;
-      border-color: #707070 !important;
-      .fa::before {
-        @extend .text-primary, .fs-4, .lh-1;
-        color: #707070 !important;
-      }
-      &.active {
-        @extend .bg-secondary, .border-secondary;
+  &.app-property-section {
+    // Filter
+    .filtered-list-actions {
+      .filter-view-change-action {
+        width: 36px;
+        height: 36px;
+        @extend  .border, .d-flex, .align-items-center, .justify-content-center, .bg-white;
+        border-color: #707070 !important;
         .fa::before {
-          @extend .text-primary-contrast !Optional;
+          @extend .text-primary, .fs-4, .lh-1;
+          color: #707070 !important;
+        }
+        &.active {
+          @extend .bg-secondary, .border-secondary;
+          .fa::before {
+            @extend .text-primary-contrast;
+          }
         }
       }
     }
-  }
-  // filter-wraper
-  .filter-wraper {
-    z-index: 2;
-  }
-  // map
-  .map-wraper {
-    background-image: url('../../../../assets/images/map-location.png');
-    background-size: contain;
-  }
-  .listing-wraper {
-    overflow: hidden;
-    overflow-y: auto;
+    // filter-wraper
+    .filter-wraper {
+      z-index: 2;
+    }
+    // map
+    .listing-wraper {
+      overflow: hidden;
+      overflow-y: auto;
 
-    .listing-header {
-      top: 0;
-      left: 0;
-      z-index: 1;
-    }
-    .all-listing {
-      margin-top: -0.5rem !important;
-    }
-  }
-  // Toggle Button
-  .filter-toggle-button,
-  .liting-toggle-button {
-    width: 30px;
-    height: 30px;
-    position: absolute;
-    top: 40px;
-    right: -15px;
-    z-index: 1;
-    &.filter-closed {
-      height: auto;
-      width: 24px;
-      right: -24px;
-      border-radius: 0px 1rem 1rem 0px;
-      padding: 15px 0px;
-      text-align: center;
-      .toggle-label {
-        writing-mode: vertical-rl;
-        transform: rotate(-180deg);
+      .listing-header {
+        top: 0;
+        left: 0;
+        z-index: 1;
+      }
+      .all-listing {
+        margin-top: -0.5rem !important;
       }
     }
-    &.map-toggle-button {
-      top: 150px
+    // Toggle Button
+    .filter-toggle-button,
+    .liting-toggle-button {
+      width: 30px;
+      height: 30px;
+      position: absolute;
+      top: 40px;
+      right: -15px;
+      z-index: 1;
+      &.filter-closed {
+        height: auto;
+        width: 24px;
+        right: -24px;
+        border-radius: 0px 1rem 1rem 0px;
+        padding: 15px 0px;
+        text-align: center;
+        .toggle-label {
+          writing-mode: vertical-rl;
+          transform: rotate(-180deg);
+        }
+      }
+      &.map-toggle-button {
+        top: 150px
+      }
     }
-  }
-  .liting-toggle-button {
-    right: auto;
-    left: -15px;
-    &.filter-closed {
+    .liting-toggle-button {
       right: auto;
-      left: -24px;
-      border-radius: 1rem 0rem 0rem 1rem;
+      left: -15px;
+      &.filter-closed {
+        right: auto;
+        left: -24px;
+        border-radius: 1rem 0rem 0rem 1rem;
+      }
+      .toggle-label{
+        margin-left: 3px !important;
+      }
     }
-    .toggle-label{
-      margin-left: 3px !important;
+
+    // all-listing
+    .all-listing {
+      margin: 0 -0.5rem;
+    }
+
+    &::ng-deep {
+      .app-property-tile {
+        width: 50%;
+        max-width: 320px;
+        padding: 0.5rem;
+      }
+      .map-container {
+        width: 100% !important;
+        height: 100% !important;
+      }
     }
   }
 
-  // all-listing
-  .all-listing {
-    margin: 0 -0.5rem;
-  }
-
-  &::ng-deep {
-    .app-property-tile {
-      width: 50%;
-      max-width: 320px;
-      padding: 0.5rem;
-    }
-  }
 }

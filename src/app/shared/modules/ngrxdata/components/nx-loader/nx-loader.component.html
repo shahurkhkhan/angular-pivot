@@ -1,1 +1,11 @@
 <ng-content></ng-content>
+
+<ng-container *ngIf="isDefault">
+  <div class="loader-wraper text-center" *ngIf="type === 'again'">
+    <h3 class="text-center fs-2 mb-0 bg-primary text-primary-contrast">Loading...</h3>
+  </div>
+  <div class="loader-wraper  text-center" *ngIf="type === 'normal'">
+    <h3 class="text-center fs-2 mb-0">Loading...</h3>
+  </div>
+</ng-container>
+

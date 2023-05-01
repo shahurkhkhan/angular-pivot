@@ -1,0 +1,138 @@
+<form
+  class="property-filter-try-container p-4"
+  [formGroup]="formGroup"
+  (ngSubmit)="formSubmit()"
+>
+  <!-- Property -->
+  <div class="property-toggle-tile text-center">
+    <mat-button-toggle-group
+      formControlName="property"
+      class="w-100 property-toggle border-0"
+    >
+      <mat-button-toggle
+        value="buy"
+        class="m-2 rounded text-center bg-white border border-secondary opacity-50"
+        [class.opacity-100]="formGroup.get('property')?.value === 'buy'"
+      >
+        <img [src]="'icn_buy.png' | assetsimage" />
+        <h3 class="fs-5 text-primary text-center">Buy</h3>
+      </mat-button-toggle>
+      <mat-button-toggle
+        value="lease"
+        class="m-2 rounded bg-white border border-secondary opacity-50"
+        [class.opacity-100]="formGroup.get('property')?.value === 'lease'"
+      >
+        <img [src]="'icn_lease.png' | assetsimage" />
+        <h3 class="fs-5 text-primary text-center">Lease</h3>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <!-- Property Type -->
+  <div class="property-types my-4" formGroupName="propertyType">
+    <label class="m-0 text-primary-contrast fs-6">Property Type</label>
+    <ul class="unstyled-list p-0 m-0">
+      <li
+        class="d-flex justify-content-between"
+        *ngFor="let propertyType of pageState.propertyTypes"
+      >
+        <div class="label d-flex align-items-center">
+          <div
+            class="property-type-icon d-flex align-items-center justify-content-start me-3"
+          >
+            <img [src]="propertyTypeIcons[propertyType.name] | assetsimage" />
+          </div>
+          <p class="text-primary-contrast m-0 fs-5 lh-sm">
+            {{ propertyType.name }}
+          </p>
+        </div>
+        <mat-checkbox
+          [formControlName]="utils.slugify(propertyType.name)"
+          [color]="'accent'"
+          class="example-margin"
+        ></mat-checkbox>
+      </li>
+    </ul>
+  </div>
+  <!-- Availability -->
+  <div class="property-types my-4" formGroupName="availability">
+    <label class="m-0 text-primary-contrast fs-6">Availability</label>
+    <ul class="unstyled-list p-0 m-0">
+      <li
+        class="d-flex justify-content-between"
+        *ngFor="let avai of pageState.availability"
+      >
+        <div class="label d-flex align-items-center">
+          <p class="text-primary-contrast m-0 fs-5 lh-sm">{{ avai.name }}</p>
+        </div>
+        <mat-checkbox
+          [formControlName]="utils.slugify(avai.name)"
+          [color]="'accent'"
+        ></mat-checkbox>
+      </li>
+    </ul>
+  </div>
+  <!-- Location -->
+  <div class="location-dropdown my-4">
+    <label class="m-0 text-primary-contrast fs-6">Location</label>
+    <ng-container *ngIf="locationsSelectors.data$ | async as locations">
+      <mat-select formControlName="location" class="app-dropdown rounded">
+        <mat-select-trigger>
+          {{
+            utils.findRecord(locations, "id", formGroup.value.location)?.name
+          }}
+        </mat-select-trigger>
+        <mat-option *ngFor="let location of locations" [value]="location.id">
+          {{ location.name }}
+        </mat-option>
+      </mat-select>
+    </ng-container>
+  </div>
+  <!-- Micromarket  -->
+  <div class="location-dropdown my-4">
+    <label class="m-0 text-primary-contrast fs-6">Micromarket</label>
+    <ng-container
+      *ngIf="
+        (marketsSelectors.data$ | async) as micromarkets;
+        else emptySelect
+      "
+    >
+      <mat-select formControlName="micromarket" class="app-dropdown rounded">
+        <mat-select-trigger>
+          {{
+            utils.findRecord(micromarkets, "id", formGroup.value.micromarket)
+              ?.name
+          }}
+        </mat-select-trigger>
+        <mat-option *ngFor="let market of micromarkets" [value]="market.id">
+          {{ market.name }}
+        </mat-option>
+      </mat-select>
+    </ng-container>
+    <ng-template #emptySelect>
+      <mat-select formControlName="micromarket" class="app-dropdown rounded">
+      </mat-select>
+    </ng-template>
+  </div>
+  <!-- Size -->
+  <div class="range-slider my-4" formGroupName="size">
+    <label class="m-0 text-primary-contrast fs-6">Size (Sq. Ft.)</label>
+    <h5 class="m-0 text-primary-contrast fs-3">
+      {{ formGroup.value.size.minSize }} to {{ formGroup.value.size.maxSize }}
+    </h5>
+    <mat-slider [color]="'accent'" min="10000" max="120000" class="w-100">
+      <input formControlName="minSize" matSliderStartThumb />
+      <input formControlName="maxSize" matSliderEndThumb />
+    </mat-slider>
+  </div>
+  <div class="action-button d-flex justify-content-between">
+    <button type="reset" class="btn btn-lg btn-default d-block text-white">
+      Reset
+    </button>
+    <button
+      type="submit"
+      class="btn btn-lg btn-secondary d-block text-secondary-contrast px-3"
+    >
+      Apply
+    </button>
+  </div>
+</form>

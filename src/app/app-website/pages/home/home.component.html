@@ -16,9 +16,8 @@
         <div class="d-flex flex-wrap simple-steps">
           <div
             class="col-md-3 simple-step-column position-relative"
-            *ngFor="let step of getSimpleAndEasySteps(); let i = index"
+            *ngFor="let step of getSimpleAndEasySteps; let i = index"
           >
-            <!-- icn_step_arrow_o.png -->
             <div class="arrow-image" *ngIf="i">
               <img
                 [src]="'icn_step_arrow_o.png' | assetsimage"
@@ -66,22 +65,45 @@
       <div class="micro-market-content">
         <div class="micro-market-search mb-2">
           <div class="col-md-6 m-auto">
-            <app-location-search></app-location-search>
+            <app-ngrxdata [isDefaultLoader]="false" [selector]="locationsSelectors" #lcSelector="ngrxdata">
+              <app-nx-data *ngIf="lcSelector.content.isDone">
+                <app-location-search (filter)="microMarketFilter($event)" [locations]="lcSelector.content.data"></app-location-search>
+              </app-nx-data>
+              <app-nx-loader class="mt-2">
+                <ngx-skeleton-loader count="1" [theme]="{
+                  'border-radius': '5px',
+                  height: '50px',
+                  width: '100%',
+                  'background-color': '#ddd'
+                }"></ngx-skeleton-loader>
+              </app-nx-loader>
+            </app-ngrxdata>
           </div>
         </div>
         <div class="micro-market-slider col-md-11 m-auto position-relative">
-          <owl-carousel-o [options]="sliderConfigration">
-            <ng-template carouselSlide *ngFor="let market of [1, 2, 3, 4]">
-              <app-micro-market-tile
-                [image]="'factory.jpg' | assetsimage"
-                [title]="'Aslali - Kheda'"
-                [contnet]="
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-                "
-              >
-              </app-micro-market-tile>
-            </ng-template>
-          </owl-carousel-o>
+          <app-ngrxdata [isDefaultLoader]="false" [selector]="microMarketSelectors" #MMselector="ngrxdata">
+            <app-nx-data>
+              <owl-carousel-o [options]="sliderConfigration">
+                <ng-template carouselSlide *ngFor="let market of MMselector.content.data">
+                  <app-micro-market-tile
+                    [image]="'factory.jpg' | assetsimage"
+                    [title]="market.name"
+                    [contnet]="'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'"
+                  >
+                  </app-micro-market-tile>
+                </ng-template>
+              </owl-carousel-o>
+            </app-nx-data>
+            <app-nx-loader class="mt-2">
+              <ngx-skeleton-loader count="3" [theme]="{
+                'border-radius': '5px',
+                height: '400px',
+                width: 'calc(94% / 3)',
+                margin: '1%',
+                'background-color': '#ddd'
+              }"></ngx-skeleton-loader>
+            </app-nx-loader>
+          </app-ngrxdata>
         </div>
       </div>
     </div>

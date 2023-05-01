@@ -1,35 +1,18 @@
 import { Observable } from "rxjs";
 
-export interface StateSelector {
-    data$: Observable<any>,
-    isSend$: Observable<any>,
-    isDone$: Observable<any>,
-    isSuccess$: Observable<any>,
-    successMsg$: Observable<any>,
-    isFailed$: Observable<any>,
-    errorMsg$: Observable<any>,
-}
-export interface NgrxListSelector<T> {
-    getList$: Observable<T>,
-    isSend$: Observable<boolean>,
-    paginator$: Observable<any>,
-    isFetching$: Observable<boolean>,
-    isDone$: Observable<boolean>,
-    isFailed$: Observable<boolean>,
-    isSuccess$: Observable<boolean>,
-    isAgain$: Observable<boolean>,
-    successMsg$: Observable<any>,
-    errorMsg$: Observable<any>,
-}
+export interface ActionSelector<T> {
+  state$: Observable<any>,
+  data$: Observable<T>,
+  isSend$: Observable<any>,
+  isDone$: Observable<any>,
+  isSuccess$: Observable<any>,
+  successMsg$: Observable<any>,
+  isFailed$: Observable<any>,
+  errorMsg$: Observable<any>,
+  isAgain$: Observable<boolean>,
 
-export interface NgrxFormSelector {
-    data$: Observable<any>,
-    isSend$: Observable<boolean>,
-    isDone$: Observable<boolean>,
-    isFailed$: Observable<boolean>,
-    isSuccess$: Observable<boolean>,
-    successMsg$: Observable<any>,
-    errorMsg$: Observable<any>,
+  // paginator$: Observable<any>,
+  // isFetching$: Observable<boolean>,
 }
 
 export interface ApiResponce {
@@ -47,6 +30,7 @@ export interface IPaginator {
     limit: number; // Current per page limit
 }
 export interface NgRxState<T> {
+    otherData: any;
     listData: T[],
     paginator: IPaginator;
     status: {
@@ -63,7 +47,6 @@ export interface NgRxState<T> {
     };
     [key: string]: any
 }
-
 export interface NgRxFormState {
     data: any,
     status: {

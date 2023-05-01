@@ -1,4 +1,4 @@
-import { Component, HostBinding } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 
 @Component({
   selector: 'app-nx-error',
@@ -8,4 +8,8 @@ import { Component, HostBinding } from '@angular/core';
 export class NxErrorComponent {
   @HostBinding('class')
   public hostClass = 'app-nx-error d-block';
+  @Input()
+  public content: any;
+  @Input()
+  public isDefaultView = true;
 }
