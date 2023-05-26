@@ -1,220 +1,344 @@
-<section class="hero-section position-relative">
-  <app-property-section *ngIf="searchBarState.isShow" class="mb-2 border-bottom border-2"></app-property-section>
-  <ng-container *ngTemplateOutlet="searchButton"></ng-container>
-</section>
-<section class="property-images-wraper">
-  <div class="all-images-wraper">
-    <owl-carousel-o [options]="sliderConfigration">
-      <ng-template carouselSlide *ngFor="let album of albums; let i = index;">
-        <div class="image-column px-1">
-          <img [src]="'factory.jpg' | assetsimage" class="image-cover" (click)="open(i)"/>
-        </div>
-      </ng-template>
-    </owl-carousel-o>
-  </div>
-</section>
-<section class="property-detail-wraper py-5 pb-4">
-  <div class="container">
-    <div class="aside-with-property-detail d-flex">
-      <!-- Property Detail -->
-      <div class="property-detail-container pe-3 col-md-9">
-        <!-- 1 -->
-        <div class="property-summry d-flex justify-content-between mb-3">
-          <div class="col-auto property-name px-2">
-            <h3 class="lh-sm fs-4">Property Name goes here</h3>
-            <span
-              class="d-inline-block sell-label px-2 py-1 rounded bg-secondary text-secondary-contrast"
-              >For Lease</span
-            >
-          </div>
-          <div class="col-auto property-address border-start px-3">
-            <address class="fs-6">
-              <span class="text-A700 d-block fs-5 font-primary-regular"
-                >VH6W+47X,
-              </span>
-              Bareja, <br />
-              Gujarat, India 382425
-            </address>
-          </div>
-          <div class="col-auto property-address border-start px-3">
-            <h4 class="text-A700 fs-3 font-primary-semibold mb-0">$ 15,000</h4>
-            <p class="fs-5">/ month</p>
-          </div>
-          <div class="col-auto property-address border-start px-3">
-            <h4 class="text-A700 fs-3 font-primary-semibold m-0">
-              Ready/Brownfield
-            </h4>
-            <p class="fs-5">Availability</p>
-          </div>
-          <div class="col-auto property-address px-2">
-            <a href="javascript:;" class="me-3">
-              <i class="fa fa-heart-o fs-3 text-secondary mt-1" aria-hidden="true"></i>
-            </a>
-            <!-- <a href="javascript:;" class="me-3">
+<!-- Property Data -->
+<app-ngrxdata
+  [isDefaultLoader]="false"
+  [selector]="propertySelector"
+  #selector="ngrxdata"
+>
+  <ng-container *ngIf="selector.content.data as property">
+    <section class="hero-section position-relative">
+      <app-property-section
+        *ngIf="searchBarState.isShow"
+        class="mb-2 border-bottom border-2"
+      ></app-property-section>
+      <ng-container *ngTemplateOutlet="searchButton"></ng-container>
+    </section>
+    <section class="property-images-wraper">
+      <div class="all-images-wraper">
+        <owl-carousel-o [options]="sliderConfigration">
+          <ng-template
+            carouselSlide
+            *ngFor="let album of albums; let i = index"
+          >
+            <div class="image-column px-1">
               <img
-                [src]="'icn_like_b.png' | assetsimage"
-                alt="icn_like_b"
-                class="img-fluid"
+                [src]="'factory.jpg' | assetsimage"
+                class="image-cover"
+                (click)="open(i)"
               />
-            </a>
-            <a href="javascript:;" class="me-3">
-              <img
-                [src]="'icn_share_b.png' | assetsimage"
-                alt="icn_share_b"
-                class="img-fluid"
-              />
-            </a> -->
-          </div>
-        </div>
-        <!-- 2 -->
-        <div
-          class="property-summry bg-secondary-3 property-size-detail d-flex p-4 px-5 mb-3 justify-content-between"
-        >
-          <div class="col-auto-property-name ps-0 px-4">
-            <h4 class="text-A700 fs-4 font-primary-regular mb-0">
-              11,000 sq ft
-            </h4>
-            <p class="fs-6 m-0">Carpet Area</p>
-          </div>
-          <div class="col-auto-property-name ps-0 px-4">
-            <h4 class="text-A700 fs-4 font-primary-regular mb-0">
-              12,500 sq ft
-            </h4>
-            <p class="fs-6 m-0">Build-up Area</p>
-          </div>
-          <div class="col-auto-property-name ps-0 px-4">
-            <h4 class="text-A700 fs-4 font-primary-regular mb-0">
-              14,000 sq ft
-            </h4>
-            <p class="fs-6 m-0">Land Area</p>
-          </div>
-          <div class="col-auto-property-name ps-0 px-4">
-            <h4 class="text-A700 fs-4 font-primary-regular mb-0">
-              9,000 sq ft
-            </h4>
-            <p class="fs-6 m-0">Total Building Area</p>
-          </div>
-          <div class="col-auto-property-name ps-0 px-4">
-            <h4 class="text-A700 fs-4 font-primary-regular mb-0">
-              3,000 sq ft
-            </h4>
-            <p class="fs-6 m-0">Single Building Area</p>
-          </div>
-        </div>
-        <!-- 3 -->
-        <div class="property-description mb-3 border-bottom border-2 pb-4">
-          <p class="fs-5 m-0">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-            dapibus tincidunt risus in condimentum. Morbi hendrerit eleifend
-            massa vitae aliquam. Donec dignissim gravida metus, nec volutpat
-            sapien maximus et. Etiam fringilla risus ac volutpat scelerisque.
-            Aliquam erat volutpat. Fusce bibendum, dui et pharetra sagittis,
-            mauris libero ornare tortor, et interdum nisl nulla at mi. Phasellus
-            bibendum rutrum lacus at dignissim. Ut leo nisi, dapibus vel
-            bibendum ac, placerat in magna. Proin maximus lectus quis purus
-            luctus, nec suscipit arcu consequat. Nulla molestie, elit vitae
-          </p>
-        </div>
-        <!-- 4 -->
-        <div class="property-description mb-3 border-bottom border-2">
-          <h4 class="fs-4 m-0">Property Details / Specifications</h4>
-          <div class="property-summry d-flex p-4 px-0 justify-content-between">
-            <div class="col-auto p-3">
-              <h4 class="text-A700 fs-4 font-primary-regular mb-0">
-                11,000 sq ft
-              </h4>
-              <p class="fs-6 m-0">Carpet Area</p>
             </div>
-            <div class="col-auto p-3">
-              <h4 class="text-A700 fs-4 font-primary-regular mb-0">
-                12,500 sq ft
-              </h4>
-              <p class="fs-6 m-0">Build-up Area</p>
-            </div>
-            <div class="col-auto p-3">
-              <h4 class="text-A700 fs-4 font-primary-regular mb-0">
-                14,000 sq ft
-              </h4>
-              <p class="fs-6 m-0">Land Area</p>
-            </div>
-            <div class="col-auto p-3">
-              <h4 class="text-A700 fs-4 font-primary-regular mb-0">
-                9,000 sq ft
-              </h4>
-              <p class="fs-6 m-0">Total Building Area</p>
-            </div>
-            <div class="col-auto align-self-end">
-              <a
-                href="javascript:;"
-                class="btn btn-secondary text-secondary-contrast"
-                >View More</a
-              >
-            </div>
-          </div>
-        </div>
-        <!-- 5 -->
-        <div class="location">
-          <h4 class="fs-4 mb-3">Location</h4>
-          <div class="google-map border">
-            <google-map class="w-100 h-100"
-              [center]="googleMapConfig.center"
-              [zoom]="googleMapConfig.zoom">
-            </google-map>
-          </div>
-        </div>
+          </ng-template>
+        </owl-carousel-o>
       </div>
-      <!-- Similler data -->
-      <div class="property-aside col-md-3">
-        <div class="micro-market-overview aside-card bg-secondary-3 p-2 py-3 mb-4">
-          <div class="aside-card-header d-flex border-primary pb-3 align-items-center justify-content-between border-bottom">
-            <h3 class="fs-4 mb-0">Micro-Market Overview</h3>
-            <a href="javascript:;" class="text-A700 font-primary-regular text-hover-primary text-primary-hover"
-              >Explore All</a
+    </section>
+    <section class="property-detail-wraper py-5 pb-4">
+      <div class="container">
+        <div class="aside-with-property-detail flex-wrap d-flex">
+          <!-- Property Detail -->
+          <div class="property-detail-container col-12 pe-lg-3 col-lg-9">
+            <!-- 1 -->
+            <div class="property-summry d-flex flex-wrap justify-content-between mb-3">
+              <div class="col-auto property-name px-2">
+                <h3 class="lh-sm fs-4">{{ property.name }}</h3>
+                <span
+                  class="d-inline-block sell-label px-2 py-1 rounded bg-secondary text-secondary-contrast"
+                >
+                  <ng-container *ngIf="property.buyorlease === 0">
+                    For Buy
+                  </ng-container>
+                  <ng-container *ngIf="property.buyorlease === 1">
+                    For Lease
+                  </ng-container>
+                </span>
+              </div>
+              <div class="col-auto property-address border-start px-3">
+                <address class="fs-6">
+                  <span class="text-A700 d-block fs-5 font-primary-regular"
+                    >{{ property.city }}
+                  </span>
+                  {{ property.address }} <br />
+                  {{ property.address1 }}
+                </address>
+              </div>
+              <div class="col-auto property-address border-start px-3">
+                <h4 class="text-A700 fs-3 font-primary-semibold mb-0">
+                  {{ property.price | currency : "INR" }}
+                </h4>
+                <p class="fs-5">/ month</p>
+              </div>
+              <ng-container *ngIf="property.availability as availability">
+                <ng-container *ngIf="availability.length">
+                  <ng-container *ngIf="availability[0] as avail">
+                    <div class="col-auto property-address border-start px-3">
+                      <h4 class="text-A700 fs-3 font-primary-semibold m-0">
+                        {{ avail.name }}
+                      </h4>
+                      <p class="fs-5">Availability</p>
+                    </div>
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+
+              <div *ngIf="0" class="col-auto property-address px-2">
+                <a href="javascript:;" class="me-3">
+                  <i
+                    class="fa fa-heart-o fs-3 text-secondary mt-1"
+                    aria-hidden="true"
+                  ></i>
+                </a>
+                <!-- <a href="javascript:;" class="me-3">
+                  <img
+                    [src]="'icn_like_b.png' | assetsimage"
+                    alt="icn_like_b"
+                    class="img-fluid"
+                  />
+                </a>
+                <a href="javascript:;" class="me-3">
+                  <img
+                    [src]="'icn_share_b.png' | assetsimage"
+                    alt="icn_share_b"
+                    class="img-fluid"
+                  />
+                </a> -->
+              </div>
+            </div>
+            <!-- 2 -->
+            <div
+              class="property-summry bg-secondary-3 property-size-detail d-flex p-4 px-5 mb-3 justify-content-between"
             >
-          </div>
-          <div class="aside-card-body mt-3">
-            <app-micro-market-tile
-              *ngFor="let item of [1,2,3,4]"
-              [type]="'list'"
-                [image]="'factory.jpg' | assetsimage"
-                [title]="'Aslali - Kheda'"
-                [contnet]="
-                  'Lorem ipsum dolor sit amet,
-                  consectetur adipiscing elit.
-                  Quisque ac magna eget massa '
+              <ng-container *ngFor="let propertyD of propertyDetail.top">
+                <div class="col-auto-property-name ps-0 px-4">
+                  <h4 class="text-A700 fs-4 font-primary-regular mb-0">
+                    {{ propertyD.value }}
+                  </h4>
+                  <p class="fs-6 m-0">{{ propertyD.name }}</p>
+                </div>
+              </ng-container>
+            </div>
+            <!-- 3 -->
+            <div class="property-description mb-3 border-bottom border-2 pb-4">
+              <p class="fs-5 m-0">
+                {{ property.description }}
+              </p>
+            </div>
+            <!-- 4 -->
+            <div class="property-description mb-3 border-bottom border-2">
+              <h4 class="fs-4 m-0">Property Details / Specifications</h4>
+              <ng-container
+                *ngIf="
+                  pageState.isViewDetail
+                    ? propertyDetail.all
+                    : propertyDetail.top.slice(0, 4) as propertiesDetailItems
                 "
-                class="mb-2"
               >
-              </app-micro-market-tile>
+                <div
+                  [@listAnimation]="propertiesDetailItems.length"
+                  class="property-summry row mt-4 justify-content-between"
+                >
+                  <ng-container
+                    *ngFor="
+                      let propertyD of propertiesDetailItems;
+                      trackBy: propertyDetailTrackByFuc;
+                      let i = index
+                    "
+                  >
+                    <div
+                      class="col-3 property-name mb-3 pb-3"
+                      [class.border-end]="(i + 1) % 4"
+                    >
+                      <h4
+                        class="text-A700 fs-4 font-primary-regular mb-0 word-break"
+                      >
+                        <ng-container *ngIf="propertyD.value; else empty">
+                          {{ propertyD.value }}
+                        </ng-container>
+                      </h4>
+                      <p class="fs-6 m-0 word-break">{{ propertyD.name }}</p>
+                    </div>
+                  </ng-container>
+                </div>
+              </ng-container>
+
+              <div class="align-self-end mb-3">
+                <a
+                  href="javascript:;"
+                  class="btn btn-secondary text-secondary-contrast"
+                  (click)="pageState.isViewDetail = !pageState?.isViewDetail"
+                >
+                  View
+                  <ng-container *ngIf="pageState.isViewDetail"
+                    >Less</ng-container
+                  >
+                  <ng-container *ngIf="!pageState.isViewDetail"
+                    >More</ng-container
+                  >
+                </a>
+              </div>
+            </div>
+            <!-- 5 -->
+            <div class="location">
+              <h4 class="fs-4 mb-3">Location</h4>
+              <div class="google-map border">
+                <google-map
+                  class="w-100 h-100"
+                  [options]="googleMapConfig"
+                ></google-map>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="micro-market-overview aside-card bg-secondary-3 py-3 p-2">
-          <div class="aside-card-header d-flex border-primary pb-3 align-items-center justify-content-between border-bottom">
-            <h3 class="fs-4 mb-0">Similar properties</h3>
-            <a href="javascript:;" class="text-A700 font-primary-regular text-primary-hover"
-              >Explore All</a
+          <!-- Similler data -->
+          <div class="property-aside mt-lg-0 mt-4 col-12 col-lg-3">
+            <div
+              class="micro-market-overview aside-card bg-secondary-3 p-2 py-3 mb-4"
             >
-          </div>
-          <div class="aside-card-body mt-3">
-            <app-property-tile [type]="'list'" class="mb-2"></app-property-tile>
-            <app-property-tile [type]="'list'" class="mb-2"></app-property-tile>
-            <app-property-tile [type]="'list'" class="mb-2"></app-property-tile>
-            <app-property-tile [type]="'list'" class="mb-2"></app-property-tile>
+              <div
+                class="aside-card-header d-flex border-primary pb-3 align-items-center justify-content-between border-bottom"
+              >
+                <h3 class="fs-4 mb-0">Micro-Market Overview</h3>
+                <a
+                  href="javascript:;"
+                  class="text-A700 font-primary-regular text-hover-primary text-primary-hover"
+                  >Explore All</a
+                >
+              </div>
+
+              <div class="aside-card-body mt-3">
+                <app-ngrxdata
+                  [selector]="microMarketSelector"
+                  #marketData="ngrxdata"
+                >
+                  <div class="row">
+                    <div *ngFor="let market of marketData.content.data" class="col-lg-12 col-md-6  col-12">
+                      <app-micro-market-tile
+                        [type]="'list'"
+                        [image]="'factory.jpg' | assetsimage"
+                        [title]="market.name"
+                        [contnet]="market.description"
+                        class="mb-2"
+                      >
+                      </app-micro-market-tile>
+                    </div>
+                  </div>
+                </app-ngrxdata>
+              </div>
+            </div>
+            <div
+              class="micro-market-overview aside-card bg-secondary-3 py-3 p-2"
+            >
+              <div
+                class="aside-card-header d-flex border-primary pb-3 align-items-center justify-content-between border-bottom"
+              >
+                <h3 class="fs-4 mb-0">Similar properties</h3>
+                <a
+                  href="javascript:;"
+                  class="text-A700 font-primary-regular text-primary-hover"
+                  >Explore All</a
+                >
+              </div>
+              <app-ngrxdata
+                [selector]="propertiesSelector"
+                #propertiesData="ngrxdata"
+              >
+                <div class="aside-card-body mt-3 row">
+                  <div *ngFor="let pdata of propertiesData.content.data" class="col-lg-12 col-md-6 col-12">
+                    <app-property-tile
+                    [type]="'list'"
+                    class="mb-2"
+                    [property]="pdata"
+                  ></app-property-tile>
+                  </div>
+                </div>
+              </app-ngrxdata>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
+    <section *ngIf="0" class="virtual-tour-wraper">
+      <div class="container">
+        <div class="virtual-tour-container py-3 border-top border-2">
+          <h4 class="fs-4 mb-3">Virtual Tour</h4>
+        </div>
+      </div>
+    </section>
+  </ng-container>
 
-<section class="virtual-tour-wraper">
-  <div class="container">
-    <div class="virtual-tour-container py-3 border-top border-2">
-      <h4 class="fs-4 mb-3">Virtual Tour</h4>
-    </div>
-  </div>
-</section>
+  <app-nx-loader>
+    <ngx-skeleton-loader
+      count="4"
+      [theme]="{
+        height: '300px',
+        width: 'calc(96% / 4)',
+        margin: '0.5%'
+      }"
+    ></ngx-skeleton-loader>
 
+    <section class="property-detail-wraper">
+      <div class="container">
+        <div class="aside-with-property-detail d-flex">
+          <!-- Property Detail -->
+          <div class="property-detail-container pe-3 col-md-9">
+            <!-- 1 -->
+            <ngx-skeleton-loader
+              count="1"
+              [theme]="{
+                height: '100px',
+                'margin-top': '30px'
+              }"
+            ></ngx-skeleton-loader>
+            <!-- 2 -->
+            <ngx-skeleton-loader
+              count="1"
+              [theme]="{
+                height: '100px',
+                width: '100%'
+              }"
+            ></ngx-skeleton-loader>
+            <!-- 3 -->
+            <ngx-skeleton-loader
+              count="1"
+              [theme]="{
+                height: '100px',
+                width: '100%'
+              }"
+            ></ngx-skeleton-loader>
+            <!-- 4 -->
+            <ngx-skeleton-loader
+              count="1"
+              [theme]="{
+                height: '100px',
+                width: '100%'
+              }"
+            ></ngx-skeleton-loader>
+            <!-- 5 -->
+            <ngx-skeleton-loader
+              count="1"
+              [theme]="{
+                height: '500px',
+                'margin-top': '30px'
+              }"
+            ></ngx-skeleton-loader>
+          </div>
+          <!-- Similler data -->
+          <div class="property-aside col-md-3">
+            <ngx-skeleton-loader
+              count="1"
+              [theme]="{
+                height: '480px',
+                'margin-top': '30px'
+              }"
+            ></ngx-skeleton-loader>
+            <ngx-skeleton-loader
+              count="1"
+              [theme]="{
+                height: '480px'
+              }"
+            ></ngx-skeleton-loader>
+          </div>
+        </div>
+      </div>
+    </section>
+  </app-nx-loader>
+</app-ngrxdata>
 
 <ng-template #searchButton>
   <a
@@ -229,10 +353,10 @@
     ></i>
     <span
       class="toggle-label text-primary-contrast d-block fs-6 mt-1 opacity-75"
-      >
-        <ng-container *ngIf="!searchBarState.isShow">Search</ng-container>
-        <ng-container *ngIf="searchBarState.isShow">Close</ng-container>
-      </span
     >
+      <ng-container *ngIf="!searchBarState.isShow">Search</ng-container>
+      <ng-container *ngIf="searchBarState.isShow">Close</ng-container>
+    </span>
   </a>
 </ng-template>
+<ng-template #empty> N/A </ng-template>

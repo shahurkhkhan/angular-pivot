@@ -1,7 +1,7 @@
 @use "sass:map";
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@use '../theme/theme' as theme;
+
 // Text Colors
 $contrasts: 'primary', 'secondary', 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 'A100', 'A200', 'A400', 'A700';
 $imageSize: cover, contain;

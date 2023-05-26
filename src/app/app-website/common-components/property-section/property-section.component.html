@@ -1,42 +1,40 @@
-<div class="d-flex map-and-listing-wraper">
+<div class="d-flex map-and-listing-wraper" *ngIf="!(propertiesDataSelectors.isFailed$ | async); else compeleteError">
   <!-- Filter 20% -->
   <div
-    [style.width]="sectionSplitState.filter.width"
+    [ngStyle]="{ flex: sectionSplitState.filter ? 1 : 0 }"
     class="filter-wraper position-relative"
   >
     <app-property-filter-tile
       #filterTile
-      [class.d-none]="!sectionSplitState.filter.show"
+      [class.d-none]="!sectionSplitState.filter"
       class="h-100"
       (filter)="filterProperties($event)"
     >
     </app-property-filter-tile>
     <ng-container *ngTemplateOutlet="filterTryOpenButton"></ng-container>
-
   </div>
   <!-- Map -->
   <div
-    [style.width]="sectionSplitState.map.width"
-    class="bg-secondary position-relative d-flex"
-    [ngStyle]="{ height: filterTileHeight + 'px' }"
+    class="bg-secondary map-wraper-part position-relative d-flex"
+    [ngStyle]="{ height: filterTileHeight + 'px',  flex: sectionSplitState.map ? 2 : 0 }"
   >
     <div
-      [class.d-none]="!sectionSplitState.map.show"
+      [class.d-none]="!sectionSplitState.map"
       class="map-wraper d-flex w-100 h-100"
     >
-      <google-map class="w-100 h-100"
-        [options]="googleMapConfig">
+    <google-map [options]="googleMapConfig" class="w-100 h-100">
+        <map-info-window>Info Window content</map-info-window>
       </google-map>
     </div>
     <ng-container *ngTemplateOutlet="mapOpenButton"></ng-container>
   </div>
   <!-- List -->
   <div
-    [style.width]="sectionSplitState.listing.width"
-    class="position-relative bg-white"
+    class="position-relative listing-wraper-part bg-white"
+    [ngStyle]="{ height: filterTileHeight + 'px',  flex: sectionSplitState.listing ? 2 : 0 }"
   >
     <div
-      [class.d-none]="!sectionSplitState.listing.show"
+      [class.d-none]="!sectionSplitState.listing"
       class="listing-wraper hide-scrollbar"
       [ngStyle]="{ height: filterTileHeight + 'px' }"
     >
@@ -54,35 +52,19 @@
             <ul
               class="list-unstyled m-0 p-0 filtered-list-actions d-flex align-items-center col-md-8"
             >
-              <!-- <li class="m-1">
-                <a
-                  href="javascript:;"
-                  class="d-block filter-view-change-action active"
-                >
-                  <i class="fa fa-th-large"></i>
-                </a>
-              </li>
-              <li class="m-1">
-                <a
-                  href="javascript:;"
-                  class="d-block filter-view-change-action"
-                >
-                  <i class="fa fa-list"></i>
-                </a>
-              </li> -->
               <li class="ps-2">
                 <p class="fs-6 m-0 font-primary-semibold">Showing {{properties.content.data.length}} results</p>
               </li>
             </ul>
 
-            <mat-select
+            <!-- <mat-select
               class="app-dropdown col-md-4 rounded border font-primary-semibold"
               value="Sort by relevance"
             >
               <mat-option value="Sort by relevance"
                 >Sort by relevance</mat-option
               >
-            </mat-select>
+            </mat-select> -->
           </div>
           <!-- List -->
           <div
@@ -103,52 +85,56 @@
   </div>
 </div>
 
+<ng-template #compeleteError>
+  <app-nx-error></app-nx-error>
+</ng-template>
+<!-- Buttons -->
 <ng-template #filterTryOpenButton>
   <a
     href="javascript:;"
     class="fs-4 filter-toggle-button d-block"
     [ngClass]="{
       'd-flex align-items-center justify-content-center text-secondary border border-secondary rounded-circle bg-white':
-        sectionSplitState.filter.show,
-      'bg-primary filter-closed': !sectionSplitState.filter.show
+        sectionSplitState.filter,
+      'bg-primary filter-closed': !sectionSplitState.filter
     }"
     (click)="sectionSplit('filter')"
   >
     <i
       class="fa"
-      [class.fa-angle-double-left]="sectionSplitState.filter.show"
-      [class.text-primary-contrast]="!sectionSplitState.filter.show"
-      [class.fa-angle-double-right]="!sectionSplitState.filter.show"
+      [class.fa-angle-double-left]="sectionSplitState.filter"
+      [class.text-primary-contrast]="!sectionSplitState.filter"
+      [class.fa-angle-double-right]="!sectionSplitState.filter"
     ></i>
     <span
-      *ngIf="!sectionSplitState.filter.show"
+      *ngIf="!sectionSplitState.filter"
       class="toggle-label text-primary-contrast d-block fs-6 mt-1 opacity-75"
       >Search</span
     >
   </a>
 </ng-template>
 <ng-template #listingOpenButton>
-  <ng-container *ngIf="sectionSplitState.map.show">
+  <ng-container *ngIf="sectionSplitState.map">
     <a
       href="javascript:;"
       class="fs-4 filter-toggle-button d-block liting-toggle-button"
       [ngClass]="{
         'd-flex align-items-center justify-content-center text-secondary border border-secondary rounded-circle bg-white':
-          sectionSplitState.listing.show,
-        'bg-primary filter-closed': !sectionSplitState.listing.show
+          sectionSplitState.listing,
+        'bg-primary filter-closed': !sectionSplitState.listing
       }"
       (click)="
-        sectionSplit(!sectionSplitState.listing.show ? 'map' : 'listing')
+        sectionSplit(!sectionSplitState.listing ? 'map' : 'listing')
       "
     >
       <i
         class="fa"
-        [class.fa-code]="sectionSplitState.listing.show"
-        [class.text-primary-contrast]="!sectionSplitState.listing.show"
-        [class.fa-angle-double-left]="!sectionSplitState.listing.show"
+        [class.fa-code]="sectionSplitState.listing"
+        [class.text-primary-contrast]="!sectionSplitState.listing"
+        [class.fa-angle-double-left]="!sectionSplitState.listing"
       ></i>
       <span
-        *ngIf="!sectionSplitState.listing.show"
+        *ngIf="!sectionSplitState.listing"
         class="toggle-label text-primary-contrast d-block fs-6 mt-1 opacity-75"
         >Listing</span
       >
@@ -156,7 +142,7 @@
   </ng-container>
 </ng-template>
 <ng-template #mapOpenButton>
-  <ng-container *ngIf="!sectionSplitState.map.show">
+  <ng-container *ngIf="!sectionSplitState.map">
     <a
       href="javascript:;"
       class="fs-4 filter-toggle-button d-block map-toggle-button bg-primary filter-closed"
@@ -170,19 +156,15 @@
     </a>
   </ng-container>
 </ng-template>
-
+<!-- Loader -->
 <ng-template #propertyLoader>
   <div
   class="listing-header p-4 py-3 bg-white position-sticky d-flex align-items-center justify-content-between"
 >
   <ul
     class="list-unstyled m-0 p-0 filtered-list-actions d-flex align-items-center col-md-8"
-  >
-    <!-- <li class="m-1"><ngx-skeleton-loader  count="1"  [theme]="{height: '36px',width: '36px'}"></ngx-skeleton-loader></li>
-    <li class="m-1"><ngx-skeleton-loader  count="1"  [theme]="{height: '36px',width: '36px'}"></ngx-skeleton-loader></li> -->
-    <li class="ps-2"><ngx-skeleton-loader  count="1"  [theme]="{height: '20px',width: '150px'}"></ngx-skeleton-loader></li>
+  >    <li class="ps-2"><ngx-skeleton-loader  count="1"  [theme]="{height: '20px',width: '150px'}"></ngx-skeleton-loader></li>
   </ul>
-
   <ngx-skeleton-loader  count="1"  [theme]="{height: '40px',width: '150px'}"></ngx-skeleton-loader>
 </div>
 <ngx-skeleton-loader  class="all-listing pt-0 p-4 d-flex flex-wrap mt-2 justify-content-center" count="6"  [theme]="{

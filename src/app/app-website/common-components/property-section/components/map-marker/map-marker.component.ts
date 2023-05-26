@@ -8,11 +8,13 @@ import { IProperty } from 'src/app/core/interfaces/property.interface';
     templateUrl: './map-marker.component.html',
     styleUrls: ['./map-marker.component.scss'],
     standalone: true,
-    imports: [CommonModule, SharedPipesModule]
+    imports: [CommonModule, SharedPipesModule],
 })
 export class MapMarkerComponent implements OnInit {
   @HostBinding('class')
-  public hostClass = 'app-map-marker';
+  public get hostClass () {
+    return `app-map-marker`;
+  };
   @Input()
   markerData: IProperty = {} as IProperty;
   // property appearance

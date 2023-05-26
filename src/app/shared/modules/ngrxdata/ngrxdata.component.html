@@ -1,6 +1,5 @@
 <!-- Data Block -->
 <ng-content select="app-nx-data"></ng-content>
-
 <!-- Loader Block-->
 <ng-container *ngIf="isDefaultLoader; else loaderTemp">
   <ng-container *ngIf="content.isSend && !content.isAgain">
@@ -16,8 +15,9 @@
 </ng-container>
 <!-- No data Block -->
 <ng-container *ngIf="isDefaultNoData; else nodataTemp">
-  <app-nx-nodata *ngIf="content.isDone && !content.data?.length && !content.isFailed"></app-nx-nodata>
+  <app-nx-nodata *ngIf="content.isDone && isDataEmpty && !content.isFailed"></app-nx-nodata>
 </ng-container>
+<ng-content></ng-content>
 
 <!-- Temps -->
 <ng-template #loaderTemp>
@@ -29,6 +29,6 @@
 <ng-template #nodataTemp>
   <ng-content
     select="app-nx-nodata"
-    *ngIf="content.isDone && !content.data?.length && !content.isFailed"
+    *ngIf="content.isDone && isDataEmpty && !content.isFailed"
   ></ng-content>
 </ng-template>

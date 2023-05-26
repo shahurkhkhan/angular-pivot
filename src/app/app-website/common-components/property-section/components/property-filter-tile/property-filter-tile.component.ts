@@ -18,15 +18,17 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { DeviceDetectService } from 'src/app/core/services/device-detect.service';
 import {
+  findObjectKey,
   findRecord,
   getFilteredArray,
-  getFilteredObject,
   propertyTypeIcons,
   slugify,
 } from 'src/app/core/utils';
 import { SharedPipesModule } from 'src/app/shared/pipes/shared-pipes.module';
 import { PropertyStore } from '../../shared/services/property.store';
 import { SubSink } from 'subsink';
+import { IProperty } from 'src/app/core/interfaces/property.interface';
+import { filter } from 'rxjs';
 
 interface IPropertyFilterTileComponentPageState {
   propertyTypes: any[];
@@ -61,6 +63,7 @@ export class PropertyFilterTileComponent implements OnDestroy {
   public formGroup: FormGroup;
   public propertyTypeIcons = propertyTypeIcons;
   public utils = { slugify, findRecord };
+  public lastAppliedFilters = {} as any;
   public pageState: IPropertyFilterTileComponentPageState = {
     propertyTypesKeyValue: {},
     availabilitsKeyValue: {},
@@ -85,6 +88,11 @@ export class PropertyFilterTileComponent implements OnDestroy {
     moduleKey: 'microMarkets',
   });
   public propertiesState = this._propertyStore.moduleState('properties');
+  public propertiesDataSelectors = this._propertyStore.useSelector<IProperty[]>({
+    statusKey: 'list',
+    moduleKey: 'properties',
+    datakey: 'list'
+  });
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -97,14 +105,14 @@ export class PropertyFilterTileComponent implements OnDestroy {
 
     // Form
     this.formGroup = this._formBuilder.group({
-      property: ['lease'],
-      location: [],
-      micromarket: [],
+      property: [undefined],
+      location: [undefined],
+      micromarket: [undefined],
       propertyType: this._formBuilder.group({}),
       availability: this._formBuilder.group({}),
       size: this._formBuilder.group({
-        minSize: [15000],
-        maxSize: [50000],
+        minSize: [10000],
+        maxSize: [120000],
       }),
     });
 
@@ -127,56 +135,42 @@ export class PropertyFilterTileComponent implements OnDestroy {
     );
 
     // Location Change
-    this.subSink.sink = this.formGroup
-      .get('location')
-      ?.valueChanges.subscribe((locationId) => {
-        this._propertyStore.getMicroMarkets({ locationId });
-      });
+    this.subSink.sink = this.formGroup.get('location')?.valueChanges
+    .pipe(filter(d => !!d))
+    .subscribe((locationId) => this._propertyStore.getMicroMarkets({ locationId }));
 
-    this.subSink.sink = this.propertiesState.subscribe((propertyState: any) => {
-      if (propertyState?.otherData?.queryPayload) {
-        const {
-          availability,
-          location,
-          micromarket,
-          property,
-          propertyType,
-          size,
-        } = propertyState?.otherData?.queryPayload;
-        const [minSize, maxSize] = size?.split('-');
-        const propertyTypeArr = propertyType?.split(',');
-        const availabilityArr = availability?.split(',');
-        this.formGroup.get('location')?.patchValue(location, {
-          emitEvent: false
-        });
-        this.formGroup.get('micromarket')?.patchValue(micromarket);
-        this.formGroup.get('property')?.patchValue(property);
-        this.formGroup.get('size')?.patchValue({minSize,maxSize});
-        if (propertyTypeArr.length) {
-          const propertyTypeWithKeyValue = {} as any;
-          propertyTypeArr.forEach((d: any) => {
-            for (const key in this.pageState.propertyTypesKeyValue) {
-              const element = this.pageState.propertyTypesKeyValue[key];
-              if (Number(d) === Number(element)) {
-                propertyTypeWithKeyValue[key] = true
-              }
-            }
-          })
-          this.formGroup.get('propertyType')?.patchValue(propertyTypeWithKeyValue);
-        }
-        if (availabilityArr.length) {
-          const availabilityWithKeyValue = {} as any;
-          availabilityArr.forEach((d: any) => {
-            for (const key in this.pageState.availabilitsKeyValue) {
-              const element = this.pageState.availabilitsKeyValue[key];
-              if (Number(d) === Number(element)) {
-                availabilityWithKeyValue[key] = true
-              }
-            }
-          })
-          this.formGroup.get('availability')?.patchValue(availabilityWithKeyValue);
-        }
+    this.subSink.sink = this._propertyStore.filterPayload$
+    .pipe(filter(d => !!d))
+    .subscribe((queryPayload: any) => {
+      this.lastAppliedFilters = queryPayload ?? {};
+      const {
+        availability = undefined,
+        location = undefined,
+        micromarket = undefined,
+        type = undefined,
+        borl = undefined,
+        sizeMin = 10000,
+        sizeMax = 120000,
+      } = this.lastAppliedFilters;
+      this.formGroup.get('location')?.patchValue(location, {
+        emitEvent: false
+      });
+      this.formGroup.get('micromarket')?.patchValue(micromarket);
+      this.formGroup.get('property')?.patchValue(borl);
+      this.formGroup.get('size')?.patchValue({minSize: sizeMin, maxSize: sizeMax});
+
+      const propertyTypeWithKeyValue = {} as any;
+      for (const key in this.pageState.propertyTypesKeyValue) {
+        const element = this.pageState.propertyTypesKeyValue[key];
+        propertyTypeWithKeyValue[key] = Number(type) === Number(element)
       }
+      const availabilityWithKeyValue = {} as any;
+      for (const key in this.pageState.availabilitsKeyValue) {
+        const element = this.pageState.availabilitsKeyValue[key];
+        availabilityWithKeyValue[key] = Number(availability) === Number(element);
+      }
+      this.formGroup.get('propertyType')?.patchValue(propertyTypeWithKeyValue);
+      this.formGroup.get('availability')?.patchValue(availabilityWithKeyValue);
     });
   }
 
@@ -184,26 +178,66 @@ export class PropertyFilterTileComponent implements OnDestroy {
     this.subSink.unsubscribe();
   }
 
-  // formSubmit
-  public formSubmit() {
+  private formValueToFilterObj () {
     const {
+      location,
+      micromarket,
+      property,
       propertyType,
       availability,
       size: { minSize, maxSize },
     } = this.formGroup.value;
-    const selectedPropertyType = getFilteredObject(propertyType, true);
-    const selectedAvailability = getFilteredObject(availability, true);
 
-    this.filter.emit({
-      ...this.formGroup.value,
-      propertyType: Object.keys(selectedPropertyType)
-        .map((k) => this.pageState.propertyTypesKeyValue[k])
-        .join(','),
-      availability: Object.keys(selectedAvailability)
-        .map((k) => this.pageState.availabilitsKeyValue[k])
-        .join(','),
-      size: `${minSize}-${maxSize}`,
+    const selectedType = this.pageState.propertyTypesKeyValue[findObjectKey(propertyType, true) as string];
+    const selectedAvailability = this.pageState.availabilitsKeyValue[findObjectKey(availability, true) as string];
+    const filterObj = {
+      sizeMin: Number(minSize),
+      sizeMax: Number(maxSize),
+    } as any;
+
+    if ( ![null, undefined, ''].includes(property) ) {
+      filterObj.borl = Number(property);
+    }
+    if ( ![null, undefined, ''].includes(location) ) {
+      filterObj.location = Number(location);
+    }
+    if ( ![null, undefined, ''].includes(micromarket) ) {
+      filterObj.micromarket = Number(micromarket);
+    }
+    if ( ![null, undefined, ''].includes(selectedType) ) {
+      filterObj.type = Number(selectedType);
+    }
+    if ( ![null, undefined, ''].includes(selectedAvailability) ) {
+      filterObj.availability = Number(selectedAvailability);
+    }
+    return filterObj;
+  }
+  // formSubmit
+  public formSubmit() {
+    if ( this.isFormHasChanges() ) {
+      this.filter.emit(this.formValueToFilterObj());
+      window.scrollTo({top: 0});
+    }
+  }
+
+  public resetForm() {
+    this.filter.emit({});
+    this.formGroup.reset({
+      borl: 0,
+      size: {
+        minSize:10000,
+        maxSize:120000
+      }
     });
+    window.scrollTo({top: 0});
+  }
+
+  private isFormHasChanges () {
+    return (
+      JSON.stringify(this.formValueToFilterObj())
+      !==
+      JSON.stringify(this.lastAppliedFilters)
+    )
   }
 
   // Helper
@@ -228,5 +262,13 @@ export class PropertyFilterTileComponent implements OnDestroy {
         new FormControl(false)
       );
     });
+  }
+  public checkboxToRadio(event: any, controlName: string, groupName: string) {
+    const allPropertyTypesControls =  (this.formGroup.get(groupName) as FormGroup).controls;
+    for (const controlkey in allPropertyTypesControls) {
+      if (controlkey !== controlName) {
+        allPropertyTypesControls[controlkey].patchValue(false);
+      }
+    }
   }
 }

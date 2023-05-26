@@ -1,4 +1,3 @@
-// Common Css
 :root {
   --bs-body-font-family: 'Proxima Nova Rg'
 }
@@ -7,13 +6,15 @@ body { margin: 0;  font-family: 'Proxima Nova Rg' !important; }
 a {
   text-decoration: none !important;
 }
-a:hover, a:focus {
-  color: white !important;
+
+.gm-ui-hover-effect {
+  top: 0px !important;
+  right: 0px !important;
+}
+.skeleton-loader {
+  background: #9fa1a5 !important;
+  width: 100%;
+  height: 20px;
+  margin-bottom: 10px;
 }
 
-// Media
-@media screen and (max-width: 1400px) {
-  html {
-    font-size: 14px;
-  }
-}

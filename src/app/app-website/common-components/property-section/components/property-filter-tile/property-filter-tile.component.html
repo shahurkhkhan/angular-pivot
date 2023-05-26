@@ -7,26 +7,28 @@
   <div class="property-toggle-tile text-center">
     <mat-button-toggle-group
       formControlName="property"
-      class="w-100 property-toggle border-0"
+      class="w-100 property-toggle border-0 d-flex justify-content-center"
     >
       <mat-button-toggle
-        value="buy"
+        [value]="0"
         class="m-2 rounded text-center bg-white border border-secondary opacity-50"
-        [class.opacity-100]="formGroup.get('property')?.value === 'buy'"
+        [class.opacity-100]="formGroup.get('property')?.value === 0"
       >
         <img [src]="'icn_buy.png' | assetsimage" />
         <h3 class="fs-5 text-primary text-center">Buy</h3>
       </mat-button-toggle>
       <mat-button-toggle
-        value="lease"
+        [value]="1"
         class="m-2 rounded bg-white border border-secondary opacity-50"
-        [class.opacity-100]="formGroup.get('property')?.value === 'lease'"
+        [class.opacity-100]="formGroup.get('property')?.value === 1"
       >
         <img [src]="'icn_lease.png' | assetsimage" />
         <h3 class="fs-5 text-primary text-center">Lease</h3>
       </mat-button-toggle>
     </mat-button-toggle-group>
   </div>
+  <!-- Dynemic Controls -->
+  <ng-container *ngIf="!(staticDataSelectors.isFailed$ | async)">
   <!-- Property Type -->
   <div class="property-types my-4" formGroupName="propertyType">
     <label class="m-0 text-primary-contrast fs-6">Property Type</label>
@@ -46,6 +48,7 @@
           </p>
         </div>
         <mat-checkbox
+          (change)="checkboxToRadio($event, utils.slugify(propertyType.name), 'propertyType')"
           [formControlName]="utils.slugify(propertyType.name)"
           [color]="'accent'"
           class="example-margin"
@@ -65,14 +68,16 @@
           <p class="text-primary-contrast m-0 fs-5 lh-sm">{{ avai.name }}</p>
         </div>
         <mat-checkbox
+          (change)="checkboxToRadio($event, utils.slugify(avai.name), 'availability')"
           [formControlName]="utils.slugify(avai.name)"
           [color]="'accent'"
         ></mat-checkbox>
       </li>
     </ul>
   </div>
+  </ng-container>
   <!-- Location -->
-  <div class="location-dropdown my-4">
+  <div class="location-dropdown my-4" *ngIf="!(locationsSelectors.isFailed$ | async)">
     <label class="m-0 text-primary-contrast fs-6">Location</label>
     <ng-container *ngIf="locationsSelectors.data$ | async as locations">
       <mat-select formControlName="location" class="app-dropdown rounded">
@@ -88,7 +93,7 @@
     </ng-container>
   </div>
   <!-- Micromarket  -->
-  <div class="location-dropdown my-4">
+  <div class="location-dropdown my-4" *ngIf="!(locationsSelectors.isFailed$ | async)">
     <label class="m-0 text-primary-contrast fs-6">Micromarket</label>
     <ng-container
       *ngIf="
@@ -119,20 +124,37 @@
     <h5 class="m-0 text-primary-contrast fs-3">
       {{ formGroup.value.size.minSize }} to {{ formGroup.value.size.maxSize }}
     </h5>
-    <mat-slider [color]="'accent'" min="10000" max="120000" class="w-100">
+    <mat-slider [color]="'accent'" [min]="10000" [max]="120000" class="w-100">
       <input formControlName="minSize" matSliderStartThumb />
       <input formControlName="maxSize" matSliderEndThumb />
     </mat-slider>
   </div>
+
   <div class="action-button d-flex justify-content-between">
-    <button type="reset" class="btn btn-lg btn-default d-block text-white">
-      Reset
-    </button>
-    <button
-      type="submit"
-      class="btn btn-lg btn-secondary d-block text-secondary-contrast px-3"
-    >
-      Apply
-    </button>
+    <ng-container *ngIf="(propertiesDataSelectors.isAgain$ | async); else notLoading">
+      <!-- <button type="reset" class="btn btn-lg btn-default d-block text-white">
+        Reset
+      </button> -->
+      <button
+        type="submit"
+        class="btn btn-lg btn-secondary d-block text-secondary-contrast px-3 w-100"
+        [disabled]="true"
+      >
+        Loading...
+      </button>
+    </ng-container>
+    <ng-template #notLoading>
+      <button type="button" (click)="resetForm()" class="btn btn-lg btn-default d-block text-white">
+        Reset
+      </button>
+      <button
+        type="submit"
+        class="btn btn-lg btn-secondary d-block text-secondary-contrast px-3"
+      >
+        Apply
+      </button>
+    </ng-template>
+
+
   </div>
 </form>

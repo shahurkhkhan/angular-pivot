@@ -4,7 +4,7 @@ export interface IProperty {
   id: number;
   name: string;
   user_id: number;
-  buyorlease: any[];
+  buyorlease: number;
   type: number;
   availability: any[],
   location: any[],
@@ -23,5 +23,6 @@ export interface IProperty {
   lan: string;
   is_premium: number;
   types: any[],
-  micro_market: any[]
+  micro_market: any[],
+  details: any[]
 }

@@ -11,6 +11,10 @@ import { PropertySectionComponent } from 'src/app/app-website/common-components/
 import { NgModule } from '@angular/core';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { PropertyDetailStore } from '../shared/services/property-detail.store';
+import { NgrxdataModule } from 'src/app/shared/modules/ngrxdata/ngrxdata.module';
+import { MapMarkerComponent } from 'src/app/app-website/common-components/property-section/components/map-marker/map-marker.component';
+import { GoogleInfoWindowComponent } from 'src/app/app-website/common-components/property-section/components/google-info-window/google-info-window.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 
 const routes: Routes = [
@@ -33,6 +37,10 @@ const routes: Routes = [
     LightboxModule,
     CarouselModule,
     GoogleMapsModule,
+    NgrxdataModule,
+    MapMarkerComponent,
+    GoogleInfoWindowComponent,
+    NgxSkeletonLoaderModule,
     RouterModule.forChild(routes)
   ],
   providers: [

@@ -5,24 +5,21 @@ export const createHTMLMapMarker = ({
   class HTMLMapMarker extends OverlayView {
     public div: any;
     public component: any;
-    public merkerData: any;
+    public markerData: any;
     public lng: any;
     public lat: any;
     public position: any;
-    public scheduleCmp: any;
     public bounds: any;
-    public markerData: any;
     public x: any;
     public y:any;
     constructor() {
       super();
       this.bounds = (args as any).bounds;
       this.position =  (args as any).latlng;
-      this.markerData =  (args as any).data;
+      this.markerData =  (args as any).markerData;
       this.x =  (args as any).x;
       this.y =  (args as any).y;
       this.component = null;
-      this.scheduleCmp = null;
     }
     /**
      * Create div for marker
@@ -33,16 +30,16 @@ export const createHTMLMapMarker = ({
       this.div.style.position = 'absolute';
       this.div.style.cursor = 'pointer';
       this.div.style.transform = 'translate(-50%,-100%)';
-      this.div.style['zIndex'] = google.maps.Marker.MAX_ZINDEX + 1;
+      // this.div.style['zIndex'] = google.maps.Marker.MAX_ZINDEX + 1;
       // Marker Component
-      this.div.style.width = '50px';
-      this.div.style.height = '60px';
+      this.div.style.width = '40px';
+      this.div.style.height = '40px';
 
       this.markerComponent();
       this.div.appendChild(this.component);
 
       const panes = this.getPanes() as any; // return MapPanes;
-      panes.overlayImage.style['zIndex'] = google.maps.Marker.MAX_ZINDEX + 1;
+      // panes.overlayImage.style['zIndex'] = google.maps.Marker.MAX_ZINDEX + 1;
       panes.overlayImage.appendChild(this.div);
       // Trigger register
       google.maps.event.addDomListener(this.div, "click", (event: any) => {
@@ -55,11 +52,7 @@ export const createHTMLMapMarker = ({
     markerComponent() {
       this.component = document.createElement('app-map-marker');
       // Component input property
-      this.component.merkerData = this.merkerData;
-      this.component.markerData = {
-        lat: this.lat,
-        lng: this.lng
-      }
+      this.component.markerData = this.markerData;
     }
 
     setClustor(obj: any) {
@@ -130,7 +123,7 @@ export const createHTMLMapMarker = ({
       return true;
     }
     getZIndex() {
-      return 9999;
+      return 9;
     }
 
     // Setting
@@ -145,10 +138,9 @@ export const createHTMLMapMarker = ({
       }
     }
     setIcon(iconUrl: any) {
-      if (this.scheduleCmp) {
-        this.scheduleCmp.icon = iconUrl;
-      }
     }
+
   }
+
   return new HTMLMapMarker();
 }

@@ -1,5 +1,7 @@
 export interface IMicroMarket {
   id: number,
+  description: string,
+  image: string,
   location_id: number,
   name: string,
   is_active: number,

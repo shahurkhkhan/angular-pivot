@@ -16,8 +16,8 @@ export class ContactComponent {
 
   constructor() {
     this.googleMapConfig.center = {} as any;
-    this.googleMapConfig.center.lat = 25.789801;
-    this.googleMapConfig.center.lng = 73.327797;
+    this.googleMapConfig.center.lat = 23.073490;
+    this.googleMapConfig.center.lng = 72.513780;
     this.googleMapConfig.zoom = 14;
   }
 }

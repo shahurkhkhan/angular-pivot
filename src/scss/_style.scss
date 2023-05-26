@@ -1,4 +1,6 @@
 @import './theme/__theme_dir';
+@import '../../node_modules/bootstrap/scss/bootstrap.scss';
 @import './abstracts/_abstracts-dir';
 @import './base/_base-dir';
 @import './components/_component-dir';
+@import './media';

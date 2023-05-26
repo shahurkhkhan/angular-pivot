@@ -24,6 +24,21 @@ export const getFilteredObject =(
   return newObj;
 }
 
+export const findObjectKey =(
+  obj: any,
+  value: any
+) => {
+  let newObj = undefined;
+  if (!obj) return newObj;
+  for (const key in obj) {
+    const element = obj[key];
+    if ( element === value ) {
+      newObj = key
+    }
+  }
+  return newObj;
+}
+
 export const findRecord = <T, K extends keyof T>(
   arr: T[],
   key: K,
@@ -50,9 +65,16 @@ export const compareTwoArry = (
   return JSON.stringify(array1) === JSON.stringify(array2)
 }
 
+export const isValueType = (value: any, type: string): boolean => {
+  const valueType = Object.prototype.toString.call(value);
+  const typeString = `[object ${type}]`;
+  return valueType === typeString;
+};
+
 export default {
   getFilteredArray,
   findRecord,
-  slugify
+  slugify,
+  isValueType
 }
 

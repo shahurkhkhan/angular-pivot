@@ -9,7 +9,8 @@ import {
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { SimpleStep } from './shared/interfaces/simple-step.interface';
 import { HomeStore } from './shared/stores/home.store';
-import { Meta } from '@angular/platform-browser';
+import { ILocation, IMicroMarket } from './shared/interfaces/micro-market.interface';
+import { ITestimonial } from './shared/interfaces/testimonial.interface';
 
 @Component({
   selector: 'app-home',
@@ -53,20 +54,33 @@ export class HomeComponent {
       '<i class="fa fa-arrow-left"></i>',
       '<i class="fa fa-arrow-right"></i>',
     ],
+    responsive : {
+      0 : {
+        items: 1,
+        nav: false
+      },
+      575 : {
+        items: 2,
+        nav: false
+      },
+      991 : {
+        items: 3
+      }
+  }
   };
 
   // APi
-  public testimonialSelectors = this._homeStore.useSelector({
+  public testimonialSelectors = this._homeStore.useSelector<ITestimonial[]>({
     statusKey: 'list',
     datakey: 'list',
     moduleKey: 'testimonials',
   });
-  public microMarketSelectors = this._homeStore.useSelector({
+  public microMarketSelectors = this._homeStore.useSelector<IMicroMarket[]>({
     statusKey: 'list',
     datakey: 'list',
     moduleKey: 'microMarkets',
   });
-  public locationsSelectors = this._homeStore.useSelector({
+  public locationsSelectors = this._homeStore.useSelector<ILocation[]>({
     statusKey: 'list',
     datakey: 'list',
     moduleKey: 'locations',

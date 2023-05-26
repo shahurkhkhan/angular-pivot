@@ -1,8 +1,9 @@
 import { AfterViewInit, Component, HostBinding, Input } from '@angular/core';
 import { ActionSelector } from 'src/app/core/interfaces/general.interface';
+import { isValueType } from 'src/app/core/utils';
 
-interface ISelectorData {
-  data: any,
+interface ISelectorData<T> {
+  data: T,
   isSend: boolean,
   paginator: any,
   isFetching: boolean,
@@ -21,11 +22,11 @@ interface ISelectorData {
   styleUrls: ['./ngrxdata.component.scss'],
   exportAs: "ngrxdata"
 })
-export class NgrxdataComponent implements AfterViewInit {
+export class NgrxdataComponent<T = any[]> implements AfterViewInit {
   @HostBinding('class')
   public hostClass = 'app-ngrxdata d-block';
   @Input()
-  public selector!: ActionSelector<any>;
+  public selector!: ActionSelector<T>;
   @Input()
   public isDefaultError: boolean = true;
   @Input()
@@ -36,7 +37,7 @@ export class NgrxdataComponent implements AfterViewInit {
   public isDefaultNoData: boolean = true;
 
 
-  public content: ISelectorData = {} as ISelectorData;
+  public content: ISelectorData<T> = { } as ISelectorData<T>;
 
   constructor() {
   }
@@ -53,5 +54,13 @@ export class NgrxdataComponent implements AfterViewInit {
     this.selector?.isAgain$.subscribe(d => this.content.isAgain = d);
     this.selector?.successMsg$.subscribe(d => this.content.successMsg = d);
     this.selector?.errorMsg$.subscribe(d => this.content.errorMsg = d);
+  }
+
+  public get isDataEmpty () {
+    return (
+      isValueType(this.content.data, 'Array')
+      &&
+      !(this.content?.data as any[]).length
+    )
   }
 }

@@ -15,10 +15,10 @@
       <div class="section-content mt-5">
         <div class="d-flex flex-wrap simple-steps">
           <div
-            class="col-md-3 simple-step-column position-relative"
+            class="col-lg-3 col-12 col-md-6 simple-step-column position-relative"
             *ngFor="let step of getSimpleAndEasySteps; let i = index"
           >
-            <div class="arrow-image" *ngIf="i">
+            <div class="arrow-image image-{{i}}" *ngIf="i">
               <img
                 [src]="'icn_step_arrow_o.png' | assetsimage"
                 alt=""
@@ -35,12 +35,12 @@
               </div>
               <div class="simple-step-contnet px-5">
                 <h3
-                  class="text-secondary-contrast text-center fw-bold fs-2 my-4"
+                  class="text-secondary-contrast text-center fw-bold fs-3 my-4"
                 >
                   {{ step.title }}
                 </h3>
                 <p
-                  class="text-secondary-contrast text-center fs-4 lh-sm fw-normal"
+                  class="text-secondary-contrast text-center fs-5 lh-sm fw-normal"
                 >
                   {{ step.content }}
                 </p>
@@ -64,9 +64,9 @@
       </div>
       <div class="micro-market-content">
         <div class="micro-market-search mb-2">
-          <div class="col-md-6 m-auto">
+          <div class="col-lg-8 col-xl-6 m-auto">
             <app-ngrxdata [isDefaultLoader]="false" [selector]="locationsSelectors" #lcSelector="ngrxdata">
-              <app-nx-data *ngIf="lcSelector.content.isDone">
+              <app-nx-data *ngIf="lcSelector.content.isDone && !lcSelector.content.isFailed">
                 <app-location-search (filter)="microMarketFilter($event)" [locations]="lcSelector.content.data"></app-location-search>
               </app-nx-data>
               <app-nx-loader class="mt-2">
@@ -88,7 +88,7 @@
                   <app-micro-market-tile
                     [image]="'factory.jpg' | assetsimage"
                     [title]="market.name"
-                    [contnet]="'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'"
+                    [contnet]="market.description"
                   >
                   </app-micro-market-tile>
                 </ng-template>
@@ -113,7 +113,7 @@
 <section class="container-fluid find-pro-section py-5 bg-primary">
   <div class="container">
     <div class="find-pro-section-container">
-      <div class="form-rows d-row">
+      <div class="form-rows row">
         <div class="col-md-6 find-property-form border-end border-white">
           <div class="form-header border-bottom border-white">
             <h3 class="text-center text-secondary-contrast fs-3 mb-1 lh-1">

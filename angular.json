@@ -34,7 +34,6 @@
               "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default.min.css",
               "node_modules/font-awesome/css/font-awesome.css",
               "node_modules/ngx-lightbox/lightbox.css",
-              "node_modules/bootstrap/scss/bootstrap.scss",
               "src/scss/_style.scss",
               "src/styles.scss"
             ],

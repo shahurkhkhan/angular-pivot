@@ -1,6 +1,5 @@
 @use '/src/scss/theme/_theme' as theme;
-@import '/src/scss/theme/__theme_dir';
-@import '/node_modules/bootstrap/scss/bootstrap';
+
 :host {
   display: block;
   // Main Banner section

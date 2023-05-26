@@ -25,4 +25,16 @@ export class PropertyDetailService {
       }
     )
   }
+
+  public getMarkets(
+    payload: any
+  ): Observable<ApiResponce> {
+    return this._api.get(
+      `${this._apiRoute.url('MICRO_MARKETS')}`,
+      {
+        params: payload
+      }
+    )
+  }
+
 }

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { AppWebsiteRoutingModule } from './app-website-routing.module';
 import { LayoutModule } from './layout/layout.module';
+import { GoogleInfoWindowComponent } from './common-components/property-section/components/google-info-window/google-info-window.component';
 
 
 @NgModule({

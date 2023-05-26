@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, delay, switchMap, tap } from 'rxjs';
+import { Observable, delay, map, pluck, switchMap, tap } from 'rxjs';
 import { NgRxState } from 'src/app/core/interfaces/general.interface';
 import { ServiceStore } from 'src/app/core/store-services/service-store.store';
 import { PropertyService } from './property.service';
@@ -21,6 +21,7 @@ export interface IPropertyState {
   providedIn: 'root',
 })
 export class PropertyStore extends ServiceStore<IPropertyState> {
+  public filterPayload$ = this.moduleState('properties').pipe(pluck('otherData'), pluck('queryPayload'))
   // constructor
   constructor(private _propertyService: PropertyService) {
     super({} as IPropertyState);
@@ -60,12 +61,15 @@ export class PropertyStore extends ServiceStore<IPropertyState> {
 
   readonly getPropertiees = this.effect((trigger$: Observable<any>) => {
     return trigger$.pipe(
-      tap(() => {
+      tap((payload) => {
         this.patchState((state) => {
           return {
             ...state,
             properties: {
               ...state.properties,
+              otherData: {
+                queryPayload: payload,
+              },
               status: {
                 list: state.properties?.list?.length
                   ? 'listRequestSentAgain'
@@ -78,16 +82,13 @@ export class PropertyStore extends ServiceStore<IPropertyState> {
       delay(2000),
       switchMap((payload) => {
         return this._propertyService.getProperties(payload).pipe(
-          tap(({ responseData, responseStatus }) => {
+          tap(({ responseData, responseStatus, responseSuccess }) => {
             const isError = responseStatus !== 200;
             this.patchState((state) => ({
               ...state,
               properties: {
                 ...state.properties,
-                otherData: {
-                  queryPayload: payload,
-                },
-                list: responseData?.data?.data,
+                list: responseSuccess ? responseData?.data?.data : [],
                 status: {
                   list: isError ? 'listRequestFailed' : 'listRequestSuccess',
                 },

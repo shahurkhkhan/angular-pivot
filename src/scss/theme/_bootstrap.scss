@@ -1,15 +1,9 @@
-@use "sass:map";
-@use '_theme' as theme;
-// Required
-@import "/node_modules/bootstrap/scss/functions";
-
-// Default variable overrides
 $body-bg: #ffffff;
 $body-color: #000;
 
-$blue: map-get($map: theme.$pivot-palette, $key: 500);
-$primary: map-get($map: theme.$pivot-palette, $key: 500);
-$secondary: map-get($map: theme.$pivot-palette, $key: A200);
+$blue: map-get($map: $pivot-palette, $key: 500);
+$primary: map-get($map: $pivot-palette, $key: 500);
+$secondary: map-get($map: $pivot-palette, $key: A200);
 $font-size-base: 0.8rem;
 $font-family-base: 'Proxima Nova Rg';
 
@@ -18,9 +12,3 @@ $theme-colors: (
   "primary": $primary,
   "secondary": $secondary
 );
-
-// Required
-@import "/node_modules/bootstrap/scss/variables";
-@import "/node_modules/bootstrap/scss/maps";
-@import "/node_modules/bootstrap/scss/mixins";
-@import "/node_modules/bootstrap/scss/root";

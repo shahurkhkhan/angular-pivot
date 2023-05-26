@@ -21,7 +21,11 @@ export class ServiceStore<T> extends ComponentStore<any> {
   }
 
   // Selector
-  public useSelector = <T>(criteria: IUseActionPayload) => {
+  public useSelector = <T>(criteria: IUseActionPayload = {
+    moduleKey: '',
+    statusKey: '',
+    datakey: ''
+  }) => {
     const { statusKey, moduleKey, datakey } = criteria;
     const selector = {} as ActionSelector<T>;
     selector.state$ = this.moduleState(moduleKey);

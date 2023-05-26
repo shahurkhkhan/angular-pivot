@@ -1,0 +1,49 @@
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+@include media-breakpoint-down(xxl){}
+@include media-breakpoint-down(xl){
+  html, body {
+    font-size: 12px;
+  }
+}
+@include media-breakpoint-down(lg) {
+  .arrow-image.image-2 {
+    display: none !important;
+  }
+}
+@include media-breakpoint-down(md) {
+  .find-pro-section {
+    .find-property-form {
+      border: none !important;
+    }
+  }
+  .arrow-image {
+    display: none !important;
+  }
+  .filter-toggle-button.filter-closed {
+    width: 25px;
+    margin-left: 4px;
+  }
+}
+@include media-breakpoint-down(sm) {
+  .app-header {
+    .contact-list {
+      display: flex;
+      width: 100%;
+      ul {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+      }
+    }
+    .social-list {
+      display: none;
+    }
+  }
+}
